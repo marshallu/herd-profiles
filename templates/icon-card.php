@@ -37,12 +37,12 @@ while ( have_posts() ) {
 			</div>
 
 			<?php if ( get_field( 'employee_position' ) ) { ?>
-				<div class="mup:mt-2 mup:font-semibold"><?php echo esc_attr( get_field( 'employee_position' ) ); ?></div>
+				<div class="mup:mt-2 mup:font-semibold"><?php echo esc_html( get_field( 'employee_position' ) ); ?></div>
 			<?php } ?>
 
 			<div class="mup:my-2 mup:flex-1 mup:border-t mup:border-gray-100 mup:mt-6 mup:pt-6 mup:text-gray-600 mup:font-normal">
 				<?php if ( get_field( 'employee_office_location' ) ) { ?>
-					<div class="mup:mt-1">Location: <?php echo esc_attr( get_field( 'employee_office_location' ) ); ?></div>
+					<div class="mup:mt-1">Location: <?php echo esc_html( get_field( 'employee_office_location' ) ); ?></div>
 				<?php } ?>
 
 				<?php if ( get_field( 'employee_phone_number' ) ) { ?>
@@ -50,7 +50,7 @@ while ( have_posts() ) {
 				<?php } ?>
 
 				<?php if ( get_field( 'employee_email_address' ) && ( 'both' === get_field( 'profile_show_email_address', 'option' ) || 'listing' === get_field( 'profile_show_email_address', 'option' ) ) ) { ?>
-					<div class="mup:my-2">Email:&nbsp;<a href="mailto:<?php echo esc_attr( get_field( 'employee_email_address' ) ); ?>"><?php echo esc_attr( get_field( 'employee_email_address' ) ); ?></a></div>
+					<div class="mup:my-2">Email:&nbsp;<a href="mailto:<?php echo esc_attr( get_field( 'employee_email_address' ) ); ?>"><?php echo esc_html( get_field( 'employee_email_address' ) ); ?></a></div>
 				<?php } ?>
 			</div>
 		</div>

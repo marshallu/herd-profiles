@@ -142,7 +142,7 @@ if ( function_exists( 'acf_add_options_sub_page' ) ) {
  * Flush rewrites whenever the plugin is activated.
  */
 function mu_profiles_activate() {
-	flush_rewrite_rules();
+	flush_rewrite_rules(); // phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.flush_rewrite_rules_flush_rewrite_rules -- Required once when the plugin is activated.
 }
 register_activation_hook( __FILE__, 'mu_profiles_activate' );
 
@@ -152,9 +152,9 @@ register_activation_hook( __FILE__, 'mu_profiles_activate' );
 function mu_profiles_deactivate() {
 	unregister_post_type( 'employee' );
 	unregister_taxonomy( 'department' );
-	flush_rewrite_rules();
+	flush_rewrite_rules(); // phpcs:ignore WordPressVIPMinimum.Functions.RestrictedFunctions.flush_rewrite_rules_flush_rewrite_rules -- Required once when the plugin is deactivated.
 }
-register_activation_hook( __FILE__, 'mu_profiles_deactivate' );
+register_deactivation_hook( __FILE__, 'mu_profiles_deactivate' );
 
 add_filter(
 	'get_the_archive_title',

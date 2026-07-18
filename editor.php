@@ -58,14 +58,18 @@ add_action( 'manage_employee_posts_custom_column', 'mu_profiles_render_employee_
 /**
  * Change placeholder text on Create/Edit Profile page to 'Enter Name Here'
  *
+ * @param string $title The default title placeholder.
+ *
  * @return string
  */
-function mu_profiles_change_default_title_to_name() {
+function mu_profiles_change_default_title_to_name( $title ) {
 	$screen = get_current_screen();
 
 	if ( 'employee' === $screen->post_type ) {
-		return 'Enter Name Here';
+		$title = 'Enter Name Here';
 	}
+
+	return $title;
 }
 add_filter( 'enter_title_here', 'mu_profiles_change_default_title_to_name' );
 

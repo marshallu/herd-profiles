@@ -28,11 +28,11 @@ if ( is_page_template( array( 'page-full-width.php', 'page-full-width-hero.php',
 					</div>
 					<div class="mup:w-full mup:lg:w-3/4 mup:lg:px-2 mup:mt-4 mup:lg:mt-0">
 						<div class="mup:text-lg mup:font-semibold mup:space-y-1">
-							<div><?php echo esc_attr( get_the_title() ); ?></div>
-							<p class="mup:text-gray-500"><?php echo esc_attr( get_field( 'employee_position' ) ); ?></p>
+						<div><?php echo esc_html( get_the_title() ); ?></div>
+						<p class="mup:text-gray-500"><?php echo esc_html( get_field( 'employee_position' ) ); ?></p>
 						</div>
 						<div class="mup:text-lg mup:mt-1">
-							<p class="mup:text-gray-500"><?php echo esc_attr( get_field( 'employee_biography' ) ); ?></p>
+						<p class="mup:text-gray-500"><?php echo esc_html( get_field( 'employee_biography' ) ); ?></p>
 						</div>
 					</div>
 				</div>

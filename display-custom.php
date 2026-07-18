@@ -82,7 +82,7 @@ function mu_profiles_department_listing( $post, $shortcode = false ) {
 		foreach ( $terms as $the_term ) {
 			$url = get_term_link( $the_term, 'department' );
 
-			if ( ! get_field( 'department_hide', $the_term ) ) {
+			if ( ! is_wp_error( $url ) && ! get_field( 'department_hide', $the_term ) ) {
 				$links[] = '<a href="' . esc_url( $url ) . '" rel="tag">' . $the_term->name . '</a>';
 			}
 		}
@@ -109,7 +109,7 @@ function mu_profiles_department( $post ) {
 		foreach ( $terms as $the_term ) {
 			$url = get_term_link( $the_term, 'department' );
 
-			if ( ! get_field( 'department_hide', $the_term ) ) {
+			if ( ! is_wp_error( $url ) && ! get_field( 'department_hide', $the_term ) ) {
 				$links[] = '<a href="' . esc_url( $url ) . '" rel="tag">' . $the_term->name . '</a>';
 			}
 		}

@@ -19,7 +19,7 @@ npm run dev
 # CSS production build (minified)
 npm run build
 
-# PHP linting (WordPress Coding Standards)
+# PHP linting (WordPress VIP Coding Standards)
 composer lint
 
 # PHP auto-fix formatting
@@ -67,6 +67,6 @@ The `site` shortcode attribute allows displaying profiles from other sites in a 
 
 Fields are organized into groups covering: name components (title, first, middle, last), contact info (phone auto-formatted via `mu_profiles_format_phone()`), headshot, bio, pronouns, service information, office hours, and display control toggles.
 
-## WordPress Coding Standards
+## WordPress VIP Coding Standards
 
-PHP files must follow WPCS. The `acf-fields.php` file is excluded from linting (configured in `phpcs.xml.dist`). Use `composer lint` to check and `composer format` to auto-fix before committing.
+PHP files must follow WPVIP’s `WordPress-VIP-Go`, WordPress Extra/Docs, and PHPCompatibilityWP standards. The `acf-fields.php` file is excluded from linting (configured in `phpcs.xml.dist`). Use `composer lint` to check and `composer format` to auto-fix before committing.

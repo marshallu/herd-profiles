@@ -46,24 +46,24 @@ while ( have_posts() ) {
 
 			if ( get_field( 'employee_preferred_pronouns' ) ) {
 				?>
-				Preferred Pronouns: <?php echo esc_attr( get_field( 'employee_preferred_pronouns' ) ); ?><br>
+				Preferred Pronouns: <?php echo esc_html( get_field( 'employee_preferred_pronouns' ) ); ?><br>
 				<?php
 			}
 
-			echo esc_attr( $position );
+			echo esc_html( $position );
 			?>
 			<br>
 
 			<?php if ( get_field( 'employee_office_location' ) ) { ?>
-				Location: <?php echo esc_attr( $office ); ?><br>
+				Location: <?php echo esc_html( $office ); ?><br>
 			<?php } ?>
 
 			<?php if ( get_field( 'employee_phone_number' ) ) { ?>
-				Telephone: <a href="tel:+1-<?php echo esc_attr( mu_profiles_format_phone( $phone ) ); ?>"><?php echo esc_attr( mu_profiles_format_phone( $phone ) ); ?></a><br>
+				Telephone: <a href="tel:+1-<?php echo esc_attr( mu_profiles_format_phone( $phone ) ); ?>"><?php echo esc_html( mu_profiles_format_phone( $phone ) ); ?></a><br>
 			<?php } ?>
 
 			<?php if ( get_field( 'employee_email_address' ) && ( 'both' === get_field( 'profile_show_email_address', 'option' ) || 'listing' === get_field( 'profile_show_email_address', 'option' ) ) ) { ?>
-				E-mail: <a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_attr( $email ); ?></a>
+			E-mail: <a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $email ); ?></a>
 			<?php } ?>
 
 			<?php if ( get_field( 'employee_website' ) ) { ?>
@@ -80,7 +80,7 @@ while ( have_posts() ) {
 				$row_title = 'Contact ' . get_the_title() . ' for:';
 			}
 			?>
-			<strong><?php echo esc_attr( $row_title ); ?></strong>
+			<strong><?php echo esc_html( $row_title ); ?></strong>
 			<ul>
 				<?php
 				foreach ( $contact_for as $item ) {
