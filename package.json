@@ -1,14 +1,14 @@
 {
-	"name": "mu-profiles",
-	"version": "1.3.0",
+	"name": "herd-profiles",
+	"version": "1.5.0",
 	"description": "",
 	"scripts": {
-		"dev": "npx @tailwindcss/cli -i ./source/css/mu-profiles.css -o ./css/mu-profiles.css --watch",
-		"build": "npx @tailwindcss/cli -i ./source/css/mu-profiles.css -o ./css/mu-profiles.css --minify"
+		"dev": "npx @tailwindcss/cli -i ./source/css/herd-profiles.css -o ./css/herd-profiles.css --watch",
+		"build": "npx @tailwindcss/cli -i ./source/css/herd-profiles.css -o ./css/herd-profiles.css --minify"
 	},
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/marshallu/mu-profiles.git"
+		"url": "git+https://github.com/marshallu/herd-profiles.git"
 	},
 	"author": "Christopher McComas",
 	"devDependencies": {

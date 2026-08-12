@@ -1,8 +1,8 @@
 <?php
 /**
- * Default template for individual profiles with MU Profiles
+ * Default template for individual profiles with Herd Profiles
  *
- * @package MU Profiles
+ * @package Herd Profiles
  */
 
 use Timber\Timber;
@@ -28,7 +28,7 @@ $context['hide_profile']    = get_field( 'hide_profile', 'option' );
 $context['position']        = get_field( 'employee_position' );
 $context['office_location'] = get_field( 'employee_office_location' );
 $context['phone']           = get_field( 'employee_phone_number' )
-	? mu_profiles_format_phone( get_field( 'employee_phone_number' ) )
+	? herd_profiles_format_phone( get_field( 'employee_phone_number' ) )
 	: '';
 $context['website']         = get_field( 'employee_website' );
 $context['more_info']       = get_field( 'more_info_link' );
@@ -62,7 +62,7 @@ if ( $cv ) {
 }
 
 // --- Department links ---
-$context['departments_html'] = mu_profiles_department_listing( $post_id, true );
+$context['departments_html'] = herd_profiles_department_listing( $post_id, true );
 
 // --- Videos ---
 $videos = get_field( 'videos' );
@@ -86,15 +86,15 @@ if ( $has_content_fields ) {
 	$toggles = '[mu_toggles]';
 
 	// Helper to build a list of items inside a toggle.
-	$list_svg = '<svg class="mup:mr-4 mup:h-6 mup:w-6 mup:fill-green mup:mt-1 mup:lg:mt-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M20 10a10 10 0 1 1-20 0 10 10 0 0 1 20 0zm-2 0a8 8 0 1 0-16 0 8 8 0 0 0 16 0zm-8 2H5V8h5V5l5 5-5 5v-3z"/></svg>';
+	$list_svg = '<svg class="herd:mr-4 herd:h-6 herd:w-6 herd:fill-green herd:mt-1 herd:lg:mt-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M20 10a10 10 0 1 1-20 0 10 10 0 0 1 20 0zm-2 0a8 8 0 1 0-16 0 8 8 0 0 0 16 0zm-8 2H5V8h5V5l5 5-5 5v-3z"/></svg>';
 
 	$build_list = function ( array $rows, string $field_key ) use ( $list_svg ) {
-		$out = '<div role="list" class="mup:flex mup:flex-wrap mup:mx-0 mup:lg:-mx-4 mup:justify-center">';
+		$out = '<div role="list" class="herd:flex herd:flex-wrap herd:mx-0 herd:lg:-mx-4 herd:justify-center">';
 		foreach ( $rows as $row ) {
-			$out .= '<div role="listitem" class="mup:px-0 mup:lg:px-4 mup:w-full mup:lg:w-full mup:flex">';
-			$out .= '<div class="mup:w-full mup:flex mup:items-start mup:px-3 mup:my-2">';
+			$out .= '<div role="listitem" class="herd:px-0 herd:lg:px-4 herd:w-full herd:lg:w-full herd:flex">';
+			$out .= '<div class="herd:w-full herd:flex herd:items-start herd:px-3 herd:my-2">';
 			$out .= $list_svg;
-			$out .= '<span class="mup:flex-1">' . wp_kses_post( $row[ $field_key ] ?? '' ) . '</span>';
+			$out .= '<span class="herd:flex-1">' . wp_kses_post( $row[ $field_key ] ?? '' ) . '</span>';
 			$out .= '</div></div>';
 		}
 		$out .= '</div>';
@@ -162,22 +162,22 @@ if ( $has_content_fields ) {
 	}
 
 	if ( get_field( 'employee_college_service' ) ) {
-		$out = '<div role="list" class="mup:flex mup:flex-wrap mup:mx-0 mup:lg:-mx-4 mup:justify-center">';
-		$svg = '<svg class="mup:mr-4 mup:h-6 mup:w-6 mup:fill-green mup:mt-1 mup:lg:mt-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M20 10a10 10 0 1 1-20 0 10 10 0 0 1 20 0zm-2 0a8 8 0 1 0-16 0 8 8 0 0 0 16 0zm-8 2H5V8h5V5l5 5-5 5v-3z"/></svg>';
+		$out = '<div role="list" class="herd:flex herd:flex-wrap herd:mx-0 herd:lg:-mx-4 herd:justify-center">';
+		$svg = '<svg class="herd:mr-4 herd:h-6 herd:w-6 herd:fill-green herd:mt-1 herd:lg:mt-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M20 10a10 10 0 1 1-20 0 10 10 0 0 1 20 0zm-2 0a8 8 0 1 0-16 0 8 8 0 0 0 16 0zm-8 2H5V8h5V5l5 5-5 5v-3z"/></svg>';
 		foreach ( get_field( 'employee_college_service' ) as $row ) {
 			$text = ! empty( $row['service_information'] ) ? $row['service_information'] : ( $row['service_to_the_college'] ?? '' );
-			$out .= '<div role="listitem" class="mup:px-0 mup:lg:px-4 mup:w-full mup:lg:w-full mup:flex"><div class="mup:w-full mup:flex mup:items-start mup:px-3 mup:my-2">' . $svg . '<span class="mup:flex-1">' . wp_kses_post( $text ) . '</span></div></div>';
+			$out .= '<div role="listitem" class="herd:px-0 herd:lg:px-4 herd:w-full herd:lg:w-full herd:flex"><div class="herd:w-full herd:flex herd:items-start herd:px-3 herd:my-2">' . $svg . '<span class="herd:flex-1">' . wp_kses_post( $text ) . '</span></div></div>';
 		}
 		$out     .= '</div>';
 		$toggles .= '[mu_toggle content_class="overflow-x-auto" title="Service to the College"]' . $out . '[/mu_toggle]';
 	}
 
 	if ( get_field( 'employee_university_service' ) ) {
-		$out = '<div role="list" class="mup:flex mup:flex-wrap mup:mx-0 mup:lg:-mx-4 mup:justify-center">';
-		$svg = '<svg class="mup:mr-4 mup:h-6 mup:w-6 mup:fill-green mup:mt-1 mup:lg:mt-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M20 10a10 10 0 1 1-20 0 10 10 0 0 1 20 0zm-2 0a8 8 0 1 0-16 0 8 8 0 0 0 16 0zm-8 2H5V8h5V5l5 5-5 5v-3z"/></svg>';
+		$out = '<div role="list" class="herd:flex herd:flex-wrap herd:mx-0 herd:lg:-mx-4 herd:justify-center">';
+		$svg = '<svg class="herd:mr-4 herd:h-6 herd:w-6 herd:fill-green herd:mt-1 herd:lg:mt-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M20 10a10 10 0 1 1-20 0 10 10 0 0 1 20 0zm-2 0a8 8 0 1 0-16 0 8 8 0 0 0 16 0zm-8 2H5V8h5V5l5 5-5 5v-3z"/></svg>';
 		foreach ( get_field( 'employee_university_service' ) as $row ) {
 			$text = ! empty( $row['service_information'] ) ? $row['service_information'] : ( $row['service_to_the_university'] ?? '' );
-			$out .= '<div role="listitem" class="mup:px-0 mup:lg:px-4 mup:w-full mup:lg:w-full mup:flex"><div class="mup:w-full mup:flex mup:items-start mup:px-3 mup:my-2">' . $svg . '<span class="mup:flex-1">' . wp_kses_post( $text ) . '</span></div></div>';
+			$out .= '<div role="listitem" class="herd:px-0 herd:lg:px-4 herd:w-full herd:lg:w-full herd:flex"><div class="herd:w-full herd:flex herd:items-start herd:px-3 herd:my-2">' . $svg . '<span class="herd:flex-1">' . wp_kses_post( $text ) . '</span></div></div>';
 		}
 		$out     .= '</div>';
 		$toggles .= '[mu_toggle content_class="overflow-x-auto" title="Service to the University"]' . $out . '[/mu_toggle]';

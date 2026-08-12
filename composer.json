@@ -1,8 +1,8 @@
 {
-	"name": "marshallu/mu-profiles",
+	"name": "marshallu/herd-profiles",
 	"description": "Plugin for managing user profiles in WordPress",
 	"keywords": ["wordpress", "plugin"],
-	"homepage": "https://github.com/marshallu/mu-profiles",
+	"homepage": "https://github.com/marshallu/herd-profiles",
 	"license": "MIT",
 	"type": "wordpress-plugin",
 	"require-dev": {
@@ -10,7 +10,9 @@
         "dealerdirect/phpcodesniffer-composer-installer": "^0.7.1",
         "php-stubs/acf-pro-stubs": "^6.2",
         "squizlabs/php_codesniffer": "@stable",
-        "wp-coding-standards/wpcs": "^3.1"
+        "wp-coding-standards/wpcs": "^3.1",
+		"automattic/vipwpcs": "^3.0",
+		"phpcompatibility/phpcompatibility-wp": "^2.1"
 	},
 	"config": {
 		"allow-plugins": {
@@ -19,7 +21,7 @@
 		}
 	},
 	"scripts": {
-		"format": "phpcbf  --extensions=php --standard=phpcs.xml.dist --report-summary --report-source",
-		"lint": "phpcs --extensions=php --standard=phpcs.xml.dist"
+		"format": "vendor/bin/phpcbf --extensions=php --standard=phpcs.xml.dist --report-summary --report-source",
+		"lint": "vendor/bin/phpcs --extensions=php --standard=phpcs.xml.dist"
 	}
 }

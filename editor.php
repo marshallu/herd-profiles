@@ -2,7 +2,7 @@
 /**
  * Customize the Dashboard and Editor for Profiles and Departments
  *
- * @package mu-profiles
+ * @package herd-profiles
  */
 
 /**
@@ -23,12 +23,12 @@ function set_custom_edit_employee_columns( $columns ) {
 	unset( $columns['wpseo-focuskw'] );
 	unset( $columns['wpseo-links'] );
 	unset( $columns['wpseo-linked'] );
-	$columns['title']      = __( 'Name', 'mu-profiles' );
-	$columns['menu_order'] = __( 'Order', 'mu-profiles' );
+	$columns['title']      = __( 'Name', 'herd-profiles' );
+	$columns['menu_order'] = __( 'Order', 'herd-profiles' );
 	return $columns;
 }
 add_filter( 'manage_employee_posts_columns', 'set_custom_edit_employee_columns' );
-add_filter( 'manage_edit-employee_sortable_columns', 'mu_profiles_add_custom_column_make_sortable' );
+add_filter( 'manage_edit-employee_sortable_columns', 'herd_profiles_add_custom_column_make_sortable' );
 
 /**
  * Make the Last Modified and Order columns sortable
@@ -36,7 +36,7 @@ add_filter( 'manage_edit-employee_sortable_columns', 'mu_profiles_add_custom_col
  * @param object $columns The list of columns.
  * @return object
  */
-function mu_profiles_add_custom_column_make_sortable( $columns ) {
+function herd_profiles_add_custom_column_make_sortable( $columns ) {
 	$columns['modified']   = 'modified';
 	$columns['menu_order'] = 'menu_order';
 	return $columns;
@@ -48,26 +48,30 @@ function mu_profiles_add_custom_column_make_sortable( $columns ) {
  * @param string $column  The column name.
  * @param int    $post_id The current post ID.
  */
-function mu_profiles_render_employee_columns( $column, $post_id ) {
+function herd_profiles_render_employee_columns( $column, $post_id ) {
 	if ( 'menu_order' === $column ) {
 		echo (int) get_post_field( 'menu_order', $post_id );
 	}
 }
-add_action( 'manage_employee_posts_custom_column', 'mu_profiles_render_employee_columns', 10, 2 );
+add_action( 'manage_employee_posts_custom_column', 'herd_profiles_render_employee_columns', 10, 2 );
 
 /**
  * Change placeholder text on Create/Edit Profile page to 'Enter Name Here'
  *
+ * @param string $title The default title placeholder.
+ *
  * @return string
  */
-function mu_profiles_change_default_title_to_name() {
+function herd_profiles_change_default_title_to_name( $title ) {
 	$screen = get_current_screen();
 
 	if ( 'employee' === $screen->post_type ) {
-		return 'Enter Name Here';
+		$title = 'Enter Name Here';
 	}
+
+	return $title;
 }
-add_filter( 'enter_title_here', 'mu_profiles_change_default_title_to_name' );
+add_filter( 'enter_title_here', 'herd_profiles_change_default_title_to_name' );
 
 /**
  * Modify the title to the name on save.
@@ -75,7 +79,7 @@ add_filter( 'enter_title_here', 'mu_profiles_change_default_title_to_name' );
  * @param array $data The array of data.
  * @return array
  */
-function mu_profiles_modify_title( $data ) {
+function herd_profiles_modify_title( $data ) {
 	if ( 'employee' === $data['post_type'] && ( isset( $_POST['acf']['field_60d9fadc1cb1d'] ) && isset( $_POST['acf']['field_60d9faf11cb1f'] ) ) ) { // phpcs:ignore
 		$employee_first = sanitize_text_field( wp_unslash( $_POST['acf']['field_60d9fadc1cb1d'] ) ); // phpcs:ignore
 		$employee_last  = sanitize_text_field( wp_unslash( $_POST['acf']['field_60d9faf11cb1f'] ) ); // phpcs:ignore
@@ -120,4 +124,4 @@ function mu_profiles_modify_title( $data ) {
 	}
 	return $data; // Returns the modified data.
 }
-add_filter( 'wp_insert_post_data', 'mu_profiles_modify_title', '99', 1 );
+add_filter( 'wp_insert_post_data', 'herd_profiles_modify_title', '99', 1 );

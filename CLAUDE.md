@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-MU Profiles is a WordPress plugin for managing employee/faculty profiles at Marshall University. It registers a custom post type (`employee`) and taxonomy (`department`), integrates with Advanced Custom Fields Pro (ACF), and provides multiple display templates via shortcodes.
+Herd Profiles is a WordPress plugin for managing employee/faculty profiles at Marshall University. It registers a custom post type (`employee`) and taxonomy (`department`), integrates with Advanced Custom Fields Pro (ACF), and provides multiple display templates via shortcodes.
 
 ## Commands
 
@@ -19,7 +19,7 @@ npm run dev
 # CSS production build (minified)
 npm run build
 
-# PHP linting (WordPress Coding Standards)
+# PHP linting (WordPress VIP Coding Standards)
 composer lint
 
 # PHP auto-fix formatting
@@ -32,9 +32,9 @@ A pre-commit hook (via Lefthook) automatically runs `composer lint` before each 
 
 ### Core Files
 
-- `mu-profiles.php` — Plugin entry point; registers the `employee` post type, `department` taxonomy, and enqueues assets
+- `herd-profiles.php` — Plugin entry point; registers the `employee` post type, `department` taxonomy, and enqueues assets
 - `acf-fields.php` — All ACF field group definitions (1600+ lines); fields are keyed with `field_*` identifiers for portability
-- `shortcodes.php` — Defines `[mu_profiles_employee]` shortcode with attributes: `ids`, `department`, `layout`, `site`, `per_row`
+- `shortcodes.php` — Defines `[herd_employee]`, `[herd_profiles]`, and `[herd_profile]` shortcodes with attributes: `ids`, `department`, `layout`, `site`, `per_row`; the legacy `[mu_*]` aliases remain supported
 - `display-custom.php` — WordPress query hooks: alphabetical sorting on department archives, removes pagination
 - `editor.php` — Admin UI customizations: dashboard columns, title placeholder, auto-generates full name from ACF fields
 
@@ -57,7 +57,7 @@ Each template is a standalone PHP file loaded by the shortcode based on the `lay
 
 ### CSS
 
-Tailwind CSS v4 source is at `source/css/mu-profiles.css`; compiled output goes to `css/mu-profiles.css`. The `source/` and `css/` directories are excluded from PHP linting.
+Tailwind CSS v4 source is at `source/css/herd-profiles.css`; compiled output goes to `css/herd-profiles.css`. The `source/` and `css/` directories are excluded from PHP linting.
 
 ### Multi-site Support
 
@@ -65,8 +65,8 @@ The `site` shortcode attribute allows displaying profiles from other sites in a 
 
 ### ACF Fields
 
-Fields are organized into groups covering: name components (title, first, middle, last), contact info (phone auto-formatted via `mu_profiles_format_phone()`), headshot, bio, pronouns, service information, office hours, and display control toggles.
+Fields are organized into groups covering: name components (title, first, middle, last), contact info (phone auto-formatted via `herd_profiles_format_phone()`), headshot, bio, pronouns, service information, office hours, and display control toggles.
 
-## WordPress Coding Standards
+## WordPress VIP Coding Standards
 
-PHP files must follow WPCS. The `acf-fields.php` file is excluded from linting (configured in `phpcs.xml.dist`). Use `composer lint` to check and `composer format` to auto-fix before committing.
+PHP files must follow WPVIP’s `WordPress-VIP-Go`, WordPress Extra/Docs, and PHPCompatibilityWP standards. The `acf-fields.php` file is excluded from linting (configured in `phpcs.xml.dist`). Use `composer lint` to check and `composer format` to auto-fix before committing.

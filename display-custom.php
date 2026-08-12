@@ -1,10 +1,10 @@
 <?php
 /**
- * Customization of display items required for the MU Profiles plugin
+ * Customization of display items required for the Herd Profiles plugin
  *
  * Department page ordering, ensuring all profiles will display not just 10, and custom department listing on profiles.
  *
- * @package mu-profiles
+ * @package herd-profiles
  */
 
 /**
@@ -13,7 +13,7 @@
  *
  * @param object $query The defauly query.
  */
-function mu_profiles_order_department_archives( $query ) {
+function herd_profiles_order_department_archives( $query ) {
 	if ( is_admin() || ! $query->is_main_query() ) {
 		return;
 	}
@@ -48,14 +48,14 @@ function mu_profiles_order_department_archives( $query ) {
 		return;
 	}
 }
-add_action( 'pre_get_posts', 'mu_profiles_order_department_archives', 1 );
+add_action( 'pre_get_posts', 'herd_profiles_order_department_archives', 1 );
 
 /**
  * All department listings will display all listings.
  *
  * @param object $query The defauly query.
  */
-function mu_profiles_unlimited_profiles( $query ) {
+function herd_profiles_unlimited_profiles( $query ) {
 	// exit out if it's the admin or it isn't the main query.
 	if ( is_admin() || ! $query->is_main_query() ) {
 		return;
@@ -65,7 +65,7 @@ function mu_profiles_unlimited_profiles( $query ) {
 		$query->set( 'posts_per_page', -1 );
 	}
 }
-add_action( 'pre_get_posts', 'mu_profiles_unlimited_profiles', 1 );
+add_action( 'pre_get_posts', 'herd_profiles_unlimited_profiles', 1 );
 
 /**
  * Displays listings of Departments on Profile listings and Profiles
@@ -73,7 +73,7 @@ add_action( 'pre_get_posts', 'mu_profiles_unlimited_profiles', 1 );
  * @param integer $post The Post ID to get the terms for.
  * @param boolean $shortcode Whether or not it's being requested from a shortcode.
  */
-function mu_profiles_department_listing( $post, $shortcode = false ) {
+function herd_profiles_department_listing( $post, $shortcode = false ) {
 	$terms = get_the_terms( $post, 'department' );
 
 	$links = array();
@@ -82,7 +82,7 @@ function mu_profiles_department_listing( $post, $shortcode = false ) {
 		foreach ( $terms as $the_term ) {
 			$url = get_term_link( $the_term, 'department' );
 
-			if ( ! get_field( 'department_hide', $the_term ) ) {
+			if ( ! is_wp_error( $url ) && ! get_field( 'department_hide', $the_term ) ) {
 				$links[] = '<a href="' . esc_url( $url ) . '" rel="tag">' . $the_term->name . '</a>';
 			}
 		}
@@ -100,7 +100,7 @@ function mu_profiles_department_listing( $post, $shortcode = false ) {
  *
  * @param integer $post The Post ID to get the terms for.
  */
-function mu_profiles_department( $post ) {
+function herd_profiles_department( $post ) {
 	$terms = get_the_terms( $post, 'department' );
 
 	$links = array();
@@ -109,7 +109,7 @@ function mu_profiles_department( $post ) {
 		foreach ( $terms as $the_term ) {
 			$url = get_term_link( $the_term, 'department' );
 
-			if ( ! get_field( 'department_hide', $the_term ) ) {
+			if ( ! is_wp_error( $url ) && ! get_field( 'department_hide', $the_term ) ) {
 				$links[] = '<a href="' . esc_url( $url ) . '" rel="tag">' . $the_term->name . '</a>';
 			}
 		}
