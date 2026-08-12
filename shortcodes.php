@@ -1,8 +1,8 @@
 <?php
 /**
- * Shortcodes for MU Profiles
+ * Shortcodes for Herd Profiles
  *
- * @package mu-profiles
+ * @package herd-profiles
  */
 
 /**
@@ -12,7 +12,7 @@
  *
  * @return string Shortcode output.
  */
-function mu_profiles_employee( $atts ) {
+function herd_profiles_employee( $atts ) {
 	$data = shortcode_atts(
 		array(
 			'ids'         => false,
@@ -153,7 +153,7 @@ function mu_profiles_employee( $atts ) {
 				}
 
 				if ( get_field( 'employee_phone_number' ) ) {
-					$output .= 'Telephone: <a href="tel:+1-' . esc_attr( mu_profiles_format_phone( $phone ) ) . '">' . esc_html( mu_profiles_format_phone( $phone ) ) . '</a><br>';
+					$output .= 'Telephone: <a href="tel:+1-' . esc_attr( herd_profiles_format_phone( $phone ) ) . '">' . esc_html( herd_profiles_format_phone( $phone ) ) . '</a><br>';
 				}
 
 				if ( get_field( 'employee_email_address' ) && ( 'both' === get_field( 'profile_show_email_address', 'option' ) || 'listing' === get_field( 'profile_show_email_address', 'option' ) ) ) {
@@ -229,7 +229,7 @@ function mu_profiles_employee( $atts ) {
 					$output .= '<div class="font-semibold mb-1">' . $position . '</div>';
 				}
 
-				$output .= mu_profiles_department_listing( get_the_ID(), true );
+				$output .= herd_profiles_department_listing( get_the_ID(), true );
 
 				$output .= '</div>';
 				if ( get_field( 'employee_office_location' ) ) {
@@ -241,7 +241,7 @@ function mu_profiles_employee( $atts ) {
 				if ( get_field( 'employee_phone_number' ) ) {
 					$output .= '<div class="flex items-center my-2">';
 					$output .= '<svg class="text-gray-500 fill-current h-4 w-4 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M493.4 24.6l-104-24c-11.3-2.6-22.9 3.3-27.5 13.9l-48 112c-4.2 9.8-1.4 21.3 6.9 28l60.6 49.6c-36 76.7-98.9 140.5-177.2 177.2l-49.6-60.6c-6.8-8.3-18.2-11.1-28-6.9l-112 48C3.9 366.5-2 378.1.6 389.4l24 104C27.1 504.2 36.7 512 48 512c256.1 0 464-207.5 464-464 0-11.2-7.7-20.9-18.6-23.4z"></path></svg>';
-					$output .= esc_html( mu_profiles_format_phone( $phone ) );
+					$output .= esc_html( herd_profiles_format_phone( $phone ) );
 					$output .= '</div>';
 				}
 				if ( get_field( 'employee_email_address' ) && ( 'both' === get_field( 'profile_show_email_address', 'option' ) || 'profile' === get_field( 'profile_show_email_address', 'option' ) ) ) {
@@ -305,7 +305,7 @@ function mu_profiles_employee( $atts ) {
 					}
 
 					if ( get_field( 'employee_phone_number' ) ) {
-						$output .= 'Telephone: <a href="tel:+1-' . esc_attr( mu_profiles_format_phone( $phone ) ) . '">' . esc_html( mu_profiles_format_phone( $phone ) ) . '</a><br>';
+						$output .= 'Telephone: <a href="tel:+1-' . esc_attr( herd_profiles_format_phone( $phone ) ) . '">' . esc_html( herd_profiles_format_phone( $phone ) ) . '</a><br>';
 					}
 
 					if ( get_field( 'employee_email_address' ) && ( 'both' === get_field( 'profile_show_email_address', 'option' ) || 'listing' === get_field( 'profile_show_email_address', 'option' ) ) ) {
@@ -348,7 +348,7 @@ function mu_profiles_employee( $atts ) {
 					}
 
 					if ( get_field( 'employee_phone_number' ) ) {
-						$output .= '<div>Phone: ' . ( mu_profiles_format_phone( get_field( 'employee_phone_number' ) ) ) . '</div>';
+						$output .= '<div>Phone: ' . ( herd_profiles_format_phone( get_field( 'employee_phone_number' ) ) ) . '</div>';
 					}
 
 					if ( get_field( 'employee_email_address' ) && ( 'both' === get_field( 'profile_show_email_address', 'option' ) || 'listing' === get_field( 'profile_show_email_address', 'option' ) ) ) {
@@ -426,7 +426,7 @@ function mu_profiles_employee( $atts ) {
 					$output .= '<div class="font-semibold mb-1">' . $position . '</div>';
 				}
 
-				$output .= mu_profiles_department_listing( get_the_ID(), true );
+				$output .= herd_profiles_department_listing( get_the_ID(), true );
 
 				$output .= '</div>';
 				if ( get_field( 'employee_office_location' ) ) {
@@ -438,7 +438,7 @@ function mu_profiles_employee( $atts ) {
 				if ( get_field( 'employee_phone_number' ) ) {
 					$output .= '<div class="flex items-center my-2">';
 					$output .= '<svg class="text-gray-200 fill-current h-5 w-5 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M493.4 24.6l-104-24c-11.3-2.6-22.9 3.3-27.5 13.9l-48 112c-4.2 9.8-1.4 21.3 6.9 28l60.6 49.6c-36 76.7-98.9 140.5-177.2 177.2l-49.6-60.6c-6.8-8.3-18.2-11.1-28-6.9l-112 48C3.9 366.5-2 378.1.6 389.4l24 104C27.1 504.2 36.7 512 48 512c256.1 0 464-207.5 464-464 0-11.2-7.7-20.9-18.6-23.4z"></path></svg>';
-					$output .= mu_profiles_format_phone( $phone );
+					$output .= herd_profiles_format_phone( $phone );
 					$output .= '</div>';
 				}
 				if ( get_field( 'employee_email_address' ) && ( 'both' === get_field( 'profile_show_email_address', 'option' ) || 'profile' === get_field( 'profile_show_email_address', 'option' ) ) ) {
@@ -493,7 +493,7 @@ function mu_profiles_employee( $atts ) {
 				}
 
 				if ( get_field( 'employee_phone_number' ) ) {
-					$output .= '<div class="mt-1">Telephone: <a href="tel:+1-' . esc_attr( mu_profiles_format_phone( $phone ) ) . '">' . esc_html( mu_profiles_format_phone( $phone ) ) . '</a></div>';
+					$output .= '<div class="mt-1">Telephone: <a href="tel:+1-' . esc_attr( herd_profiles_format_phone( $phone ) ) . '">' . esc_html( herd_profiles_format_phone( $phone ) ) . '</a></div>';
 				}
 
 				if ( get_field( 'employee_email_address' ) && ( 'both' === get_field( 'profile_show_email_address', 'option' ) || 'listing' === get_field( 'profile_show_email_address', 'option' ) ) ) {
@@ -525,7 +525,7 @@ function mu_profiles_employee( $atts ) {
 				if ( get_field( 'employee_phone_number' ) ) {
 					$output .= '<div class="flex items-center my-2">';
 					$output .= '<svg class="text-green fill-current h-4 w-4 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M493.4 24.6l-104-24c-11.3-2.6-22.9 3.3-27.5 13.9l-48 112c-4.2 9.8-1.4 21.3 6.9 28l60.6 49.6c-36 76.7-98.9 140.5-177.2 177.2l-49.6-60.6c-6.8-8.3-18.2-11.1-28-6.9l-112 48C3.9 366.5-2 378.1.6 389.4l24 104C27.1 504.2 36.7 512 48 512c256.1 0 464-207.5 464-464 0-11.2-7.7-20.9-18.6-23.4z"></path></svg>';
-					$output .= '<div>' . esc_html( mu_profiles_format_phone( $phone ) ) . '</div>';
+					$output .= '<div>' . esc_html( herd_profiles_format_phone( $phone ) ) . '</div>';
 					$output .= '</div>';
 				}
 				if ( get_field( 'employee_email_address' ) && ( 'both' === get_field( 'profile_show_email_address', 'option' ) || 'profile' === get_field( 'profile_show_email_address', 'option' ) ) ) {
@@ -570,7 +570,7 @@ function mu_profiles_employee( $atts ) {
 
 				$output .= '<td class="">' . $position . '</td>';
 				$output .= '<td class="">' . $office . '</td>';
-				$output .= '<td class="whitespace-nowrap">' . esc_html( mu_profiles_format_phone( get_field( 'employee_phone_number', get_the_ID() ) ) ) . '</td>';
+				$output .= '<td class="whitespace-nowrap">' . esc_html( herd_profiles_format_phone( get_field( 'employee_phone_number', get_the_ID() ) ) ) . '</td>';
 				if ( 'both' === get_field( 'profile_show_email_address', 'option' ) || 'profile' === get_field( 'profile_show_email_address', get_the_ID(), 'option' ) ) {
 					$output .= '<td class="whitespace-nowrap"><a href="mailto:' . esc_attr( get_field( 'employee_email_address', get_the_ID() ) ) . '" rel="noopener noreferrer">' . esc_html( get_field( 'employee_email_address', get_the_ID() ) ) . '</a></td>';
 				}
@@ -592,6 +592,9 @@ function mu_profiles_employee( $atts ) {
 	wp_reset_postdata();
 	return $output;
 }
-add_shortcode( 'mu_employee', 'mu_profiles_employee' );
-add_shortcode( 'mu_profiles', 'mu_profiles_employee' );
-add_shortcode( 'mu_profile', 'mu_profiles_employee' );
+add_shortcode( 'herd_employee', 'herd_profiles_employee' );
+add_shortcode( 'herd_profiles', 'herd_profiles_employee' );
+add_shortcode( 'herd_profile', 'herd_profiles_employee' );
+add_shortcode( 'mu_employee', 'herd_profiles_employee' );
+add_shortcode( 'mu_profiles', 'herd_profiles_employee' );
+add_shortcode( 'mu_profile', 'herd_profiles_employee' );

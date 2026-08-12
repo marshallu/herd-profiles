@@ -1,4 +1,4 @@
-@import 'tailwindcss' prefix(mup);
+@import 'tailwindcss' prefix(herd);
 
 @custom-variant hc (&:where(html.is-high-contrast *));
 

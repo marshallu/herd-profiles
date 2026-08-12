@@ -1,8 +1,8 @@
 {
-	"name": "marshallu/mu-profiles",
+	"name": "marshallu/herd-profiles",
 	"description": "Plugin for managing user profiles in WordPress",
 	"keywords": ["wordpress", "plugin"],
-	"homepage": "https://github.com/marshallu/mu-profiles",
+	"homepage": "https://github.com/marshallu/herd-profiles",
 	"license": "MIT",
 	"type": "wordpress-plugin",
 	"require-dev": {

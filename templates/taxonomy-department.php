@@ -1,8 +1,8 @@
 <?php
 /**
- * Default template for displaying Department listings for MU Profiles
+ * Default template for displaying Department listings for Herd Profiles
  *
- * @package MU Profiles
+ * @package Herd Profiles
  */
 
 use Timber\Timber;

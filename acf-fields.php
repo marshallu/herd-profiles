@@ -1,10 +1,10 @@
 <?php
 /**
- * MU Profiles
+ * Herd Profiles
  *
  * This plugin was built to allow for Marshall University websites to display employee profiles.
  *
- * @package MU Profiles
+ * @package Herd Profiles
  */
 add_action( 'acf/include_fields', function() {
 	if ( ! function_exists( 'acf_add_local_field_group' ) ) {

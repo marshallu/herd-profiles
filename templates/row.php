@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package MU Profiles
+ * @package Herd Profiles
  */
 
 while ( have_posts() ) {
@@ -17,26 +17,26 @@ while ( have_posts() ) {
 	$email       = get_field( 'employee_email_address' );
 	$contact_for = get_field( 'employee_contact_for' );
 	?>
-	<div class="marsha-row mup:flex mup:flex-wrap mup:-mx-2 mup:lg:-mx-6 mup:py-6 mup:border-b mup:border-gray-100">
-		<div class="columns mup:w-full mup:lg:w-1/6 mup:lg:px-6 mup:mt-6 mup:lg:mt-0">
+	<div class="marsha-row herd:flex herd:flex-wrap herd:-mx-2 herd:lg:-mx-6 herd:py-6 herd:border-b herd:border-gray-100">
+		<div class="columns herd:w-full herd:lg:w-1/6 herd:lg:px-6 herd:mt-6 herd:lg:mt-0">
 			<?php if ( get_field( 'employee_headshot' ) ) { ?>
-				<img src="<?php echo esc_url( $image['sizes']['medium'] ); ?>" alt="<?php echo esc_attr( $image['alt'] ); ?>" class="mup:mx-auto mup:rounded-lg" />
+				<img src="<?php echo esc_url( $image['sizes']['medium'] ); ?>" alt="<?php echo esc_attr( $image['alt'] ); ?>" class="herd:mx-auto herd:rounded-lg" />
 			<?php } ?>
 		</div>
-		<div class="columns mup:w-full mup:lg:w-5/12 mup:lg:px-6 mup:mt-6 mup:lg:mt-0">
+		<div class="columns herd:w-full herd:lg:w-5/12 herd:lg:px-6 herd:mt-6 herd:lg:mt-0">
 			<?php
 			if ( get_field( 'employee_more_info_link' ) ) {
 				?>
-					<span class="mup:text-lg mup:font-bold"><a href="<?php echo esc_url( get_field( 'employee_more_info_link' ) ); ?>" class="mup:underline mup:hover:no-underline"><?php the_title(); ?></a></span><br>
+					<span class="herd:text-lg herd:font-bold"><a href="<?php echo esc_url( get_field( 'employee_more_info_link' ) ); ?>" class="herd:underline herd:hover:no-underline"><?php the_title(); ?></a></span><br>
 				<?php
 			} else {
 				if ( get_field( 'department_hide_link_to_profile', $the_term ) ) {
 					?>
-						<span class="mup:text-lg mup:font-bold"><?php the_title(); ?></span><br>
+						<span class="herd:text-lg herd:font-bold"><?php the_title(); ?></span><br>
 					<?php
 				} else {
 					?>
-					<span class="mup:text-lg mup:font-bold"><a href="<?php echo esc_url( get_post_permalink() ); ?>" rel="noopener noreferrer" class="mup:underline mup:hover:no-underline"><?php the_title(); ?></a></span><br>
+					<span class="herd:text-lg herd:font-bold"><a href="<?php echo esc_url( get_post_permalink() ); ?>" rel="noopener noreferrer" class="herd:underline herd:hover:no-underline"><?php the_title(); ?></a></span><br>
 					<?php
 				}
 				?>
@@ -59,7 +59,7 @@ while ( have_posts() ) {
 			<?php } ?>
 
 			<?php if ( get_field( 'employee_phone_number' ) ) { ?>
-				Telephone: <a href="tel:+1-<?php echo esc_attr( mu_profiles_format_phone( $phone ) ); ?>"><?php echo esc_html( mu_profiles_format_phone( $phone ) ); ?></a><br>
+				Telephone: <a href="tel:+1-<?php echo esc_attr( herd_profiles_format_phone( $phone ) ); ?>"><?php echo esc_html( herd_profiles_format_phone( $phone ) ); ?></a><br>
 			<?php } ?>
 
 			<?php if ( get_field( 'employee_email_address' ) && ( 'both' === get_field( 'profile_show_email_address', 'option' ) || 'listing' === get_field( 'profile_show_email_address', 'option' ) ) ) { ?>
@@ -71,7 +71,7 @@ while ( have_posts() ) {
 			<?php } ?>
 		</div>
 
-		<div class="columns mup:w-full mup:lg:w-5/12 mup:lg:px-6  mup:mt-6 mup:lg:mt-0">
+		<div class="columns herd:w-full herd:lg:w-5/12 herd:lg:px-6  herd:mt-6 herd:lg:mt-0">
 		<?php
 		if ( $contact_for ) {
 			if ( ! empty( get_field( 'profile_row_title', 'option' ) ) ) {
