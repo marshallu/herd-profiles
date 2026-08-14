@@ -1,6 +1,6 @@
 {
 	"name": "herd-profiles",
-	"version": "1.5.0",
+	"version": "1.6.0",
 	"description": "",
 	"scripts": {
 		"dev": "npx @tailwindcss/cli -i ./source/css/herd-profiles.css -o ./css/herd-profiles.css --watch",
