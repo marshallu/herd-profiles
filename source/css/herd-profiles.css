@@ -1,4 +1,5 @@
 @import 'tailwindcss' prefix(herd);
+@source "../../templates/**/*.twig";
 
 @custom-variant hc (&:where(html.is-high-contrast *));
 

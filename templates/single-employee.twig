@@ -18,10 +18,10 @@
 		</header>
 
 		<div class="entry-content">
-			<div class="grid grid-cols-1 lg:grid-cols-4 gap-8">
+			<div class="herd:grid herd:grid-cols-1 herd:lg:grid-cols-4 herd:gap-8">
 
 				{# Left column: headshot, contact details, social #}
-				<div class="lg:col-span-1">
+				<div class="herd:lg:col-span-1">
 					{% if headshot %}
 						<img src="{{ headshot.src }}" srcset="{{ headshot.srcset }}" alt="{{ headshot.alt }}" class="rounded-lg" />
 					{% endif %}
@@ -106,7 +106,7 @@
 				</div>
 
 				{# Right column: videos, biography, toggles #}
-				<div class="lg:col-span-3">
+				<div class="herd:lg:col-span-3">
 					{% if youtube_videos %}
 						{% if video_section_title %}
 							<h2>{{ video_section_title }}</h2>
