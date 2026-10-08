@@ -29,6 +29,9 @@ function herd_profiles_employee( $atts ) {
 		switch_to_blog( get_id_from_blogname( $data['site'] ) );
 	}
 
+	$the_term     = false;
+	$dept_listing = false;
+
 	if ( $data['ids'] ) {
 		$ids = trim( $data['ids'] );
 		$ids = array_map( 'trim', explode( ',', $ids ) );
@@ -43,10 +46,6 @@ function herd_profiles_employee( $atts ) {
 			),
 		);
 	} else {
-
-		$the_term     = false;
-		$dept_listing = false;
-
 		if ( get_field( 'sort_by_last_name_first_name', 'option' ) ) {
 			$args = array(
 				'post_type'      => 'employee',
