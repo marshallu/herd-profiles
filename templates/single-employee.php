@@ -49,7 +49,7 @@ if ( get_field( 'employee_email_address' ) && ( 'both' === $show_email_option ||
 $headshot = get_field( 'employee_headshot' );
 if ( $headshot ) {
 	$context['headshot'] = array(
-		'src'    => $headshot['sizes']['large'],
+		'src'    => $headshot['sizes']['large'] ?? $headshot['url'],
 		'srcset' => wp_get_attachment_image_srcset( $headshot['ID'], 'large' ),
 		'alt'    => $headshot['alt'],
 	);

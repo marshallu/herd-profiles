@@ -20,7 +20,7 @@ while ( have_posts() ) {
 	<div class="marsha-row herd:flex herd:flex-wrap herd:-mx-2 herd:lg:-mx-6 herd:py-6 herd:border-b herd:border-gray-100">
 		<div class="columns herd:w-full herd:lg:w-1/6 herd:lg:px-6 herd:mt-6 herd:lg:mt-0">
 			<?php if ( get_field( 'employee_headshot' ) ) { ?>
-				<img src="<?php echo esc_url( $image['sizes']['medium'] ); ?>" alt="<?php echo esc_attr( $image['alt'] ); ?>" class="herd:mx-auto herd:rounded-lg" />
+				<img src="<?php echo esc_url( $image['sizes']['medium'] ?? $image['url'] ); ?>" alt="<?php echo esc_attr( $image['alt'] ); ?>" class="herd:mx-auto herd:rounded-lg" />
 			<?php } ?>
 		</div>
 		<div class="columns herd:w-full herd:lg:w-5/12 herd:lg:px-6 herd:mt-6 herd:lg:mt-0">

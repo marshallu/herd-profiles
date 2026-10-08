@@ -131,7 +131,7 @@ function herd_profiles_employee( $atts ) {
 				$output .= '<div class="columns w-full lg:w-1/6 lg:px-6 mt-6 lg:mt-0">';
 
 				if ( get_field( 'employee_headshot' ) ) {
-					$output .= '<img src="' . esc_url( $image['sizes']['medium'] ) . '" srcset="' . esc_attr( wp_get_attachment_image_srcset( $image['ID'], 'large' ) ) . '" alt="' . esc_attr( $image['sizes']['medium'] ) . '" class="rounded-lg" />';
+					$output .= '<img src="' . esc_url( $image['sizes']['medium'] ?? $image['url'] ) . '" srcset="' . esc_attr( wp_get_attachment_image_srcset( $image['ID'], 'large' ) ) . '" alt="' . esc_attr( $image['alt'] ) . '" class="rounded-lg" />';
 				}
 
 				$output .= '</div>';
@@ -209,7 +209,7 @@ function herd_profiles_employee( $atts ) {
 				$output .= '<div class="marsha-row flex flex-wrap -mx-2 lg:-mx-6 py-6 border-b border-gray-100">';
 				$output .= '<div class="columns w-full lg:w-1/6 lg:px-6 mt-6 lg:mt-0">';
 				if ( get_field( 'employee_headshot' ) ) {
-					$output .= '<img src="' . esc_url( $image['sizes']['medium'] ) . '"  srcset="' . esc_attr( wp_get_attachment_image_srcset( $image['ID'], 'large' ) ) . '" alt="' . esc_url( $image['alt'] ) . '" class="rounded-lg" />';
+					$output .= '<img src="' . esc_url( $image['sizes']['medium'] ?? $image['url'] ) . '"  srcset="' . esc_attr( wp_get_attachment_image_srcset( $image['ID'], 'large' ) ) . '" alt="' . esc_attr( $image['alt'] ) . '" class="rounded-lg" />';
 				}
 				$output .= '</div>';
 				$output .= '<div class="columns w-full lg:w-3/4 lg:px-6 mt-6 lg:mt-0 entry-content">';
@@ -285,7 +285,7 @@ function herd_profiles_employee( $atts ) {
 
 					$output .= '<div class="columns w-full lg:w-1/3 lg:px-6 mt-6 lg:mt-0">';
 					if ( get_field( 'employee_headshot' ) ) {
-						$output .= '<img src="' . esc_url( $image['sizes']['medium'] ) . '" srcset="' . esc_attr( wp_get_attachment_image_srcset( $image['ID'], 'large' ) ) . '" alt="' . esc_attr( $image['sizes']['medium'] ) . '" class="rounded-lg w-full" />';
+						$output .= '<img src="' . esc_url( $image['sizes']['medium'] ?? $image['url'] ) . '" srcset="' . esc_attr( wp_get_attachment_image_srcset( $image['ID'], 'large' ) ) . '" alt="' . esc_attr( $image['alt'] ) . '" class="rounded-lg w-full" />';
 					}
 					$output .= '</div>';
 
@@ -413,7 +413,7 @@ function herd_profiles_employee( $atts ) {
 				$output .= '<div class="marsha-row flex flex-wrap -mx-2 lg:-mx-6 py-6 border-b border-gray-100">';
 				$output .= '<div class="columns w-full lg:w-1/6 lg:px-6 mt-6 lg:mt-0">';
 				if ( get_field( 'employee_headshot' ) ) {
-					$output .= '<img src="' . esc_url( $image['sizes']['medium'] ) . '"  srcset="' . esc_attr( wp_get_attachment_image_srcset( $image['ID'], 'large' ) ) . '" alt="' . esc_url( $image['alt'] ) . '" class="rounded-lg" />';
+					$output .= '<img src="' . esc_url( $image['sizes']['medium'] ?? $image['url'] ) . '"  srcset="' . esc_attr( wp_get_attachment_image_srcset( $image['ID'], 'large' ) ) . '" alt="' . esc_attr( $image['alt'] ) . '" class="rounded-lg" />';
 				}
 				$output .= '</div>';
 				$output .= '<div class="columns w-full lg:w-3/4 lg:px-6 mt-6 lg:mt-0 entry-content">';
@@ -473,7 +473,7 @@ function herd_profiles_employee( $atts ) {
 				$output .= '<div class="h-full bg-white flex flex-col rounded-sm shadow-md border border-gray-50 ring-1 ring-gray-50/50 ">';
 
 				if ( get_field( 'employee_headshot' ) ) {
-					$output .= '<img src="' . esc_url( $image['sizes']['medium'] ) . '"  srcset="' . esc_attr( wp_get_attachment_image_srcset( $image['ID'], 'large' ) ) . '" alt="' . esc_url( $image['alt'] ) . '"  class="rounded-t block w-full" loading="lazy" />';
+					$output .= '<img src="' . esc_url( $image['sizes']['medium'] ?? $image['url'] ) . '"  srcset="' . esc_attr( wp_get_attachment_image_srcset( $image['ID'], 'large' ) ) . '" alt="' . esc_attr( $image['alt'] ) . '"  class="rounded-t block w-full" loading="lazy" />';
 				}
 
 				$output .= '<div class="h-full flex flex-col pb-8 px-6">';
