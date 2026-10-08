@@ -192,7 +192,7 @@ function herd_profiles_employee( $atts ) {
 			}
 
 			if ( $data['two_per_row'] ) {
-				$output .= '<div class="flex flex-wrap lg:-mx-6">';
+				$output .= '</div>';
 			}
 		} elseif ( 'enhanced' === $display_style ) {
 			while ( $the_query->have_posts() ) {
