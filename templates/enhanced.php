@@ -27,7 +27,7 @@ while ( have_posts() ) {
 		<?php
 		if ( get_field( 'department_hide_link_to_profile', $the_term ) ) {
 			?>
-			<div class="herd:text-xl herd:font-semibold herd:uppercase"><?php the_title(); ?></a></div>
+			<div class="herd:text-xl herd:font-semibold herd:uppercase"><?php the_title(); ?></div>
 			<?php
 		} else {
 			?>

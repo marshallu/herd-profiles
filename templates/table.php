@@ -17,7 +17,7 @@
 				<th>Office</th>
 				<th>Phone</th>
 				<?php
-				if ( 'both' === get_field( 'profile_show_email_address', 'option' ) || get_field( 'listing' === 'profile_show_email_address', 'option' ) ) {
+				if ( 'both' === get_field( 'profile_show_email_address', 'option' ) || 'listing' === get_field( 'profile_show_email_address', 'option' ) ) {
 					?>
 					<th>Email</th>
 				<?php } ?>

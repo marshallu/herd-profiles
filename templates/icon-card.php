@@ -27,7 +27,9 @@ while ( have_posts() ) {
 	$email    = get_field( 'employee_email_address' );
 	?>
 	<div class="herd:h-full herd:bg-white herd:flex herd:flex-col herd:rounded-sm herd:shadow-md herd:border herd:border-gray-50 herd:ring-1 herd:ring-gray-50/50 ">
-		<img src="<?php echo esc_url( $image['url'] ); ?>" srcset="<?php echo esc_attr( wp_get_attachment_image_srcset( $image['ID'], 'large' ) ); ?>" alt="<?php echo esc_attr( $image['alt'] ); ?>" class="herd:rounded-t herd:block herd:w-full" loading="lazy">
+		<?php if ( $image ) { ?>
+			<img src="<?php echo esc_url( $image['url'] ); ?>" srcset="<?php echo esc_attr( wp_get_attachment_image_srcset( $image['ID'], 'large' ) ); ?>" alt="<?php echo esc_attr( $image['alt'] ); ?>" class="herd:rounded-t herd:block herd:w-full" loading="lazy">
+		<?php } ?>
 
 		<div class="herd:h-full herd:flex herd:flex-col herd:pb-8 herd:px-6">
 			<div class="herd:flex herd:items-start herd:pt-6">

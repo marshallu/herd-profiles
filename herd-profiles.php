@@ -302,6 +302,10 @@ add_filter( 'template_include', 'load_department_template' );
  * @return string
  */
 function herd_profiles_format_phone( $phone ) {
+	if ( ! $phone ) {
+		return '';
+	}
+
 	$phone = str_replace( '304.696.', '304-696-', $phone );
 	$phone = str_replace( '304.256.', '304-256-', $phone );
 	$phone = str_replace( '304.746.', '304-746-', $phone );
@@ -393,10 +397,17 @@ add_filter(
 function herd_profiles_vite( $filename, $main_dir = 'source' ) {
 	$filename = $main_dir . $filename;
 
-	$mix_data   = file_get_contents( plugin_dir_path( __FILE__ ) . '/public/build/manifest.json' );
-	$files_list = json_decode( $mix_data, true );
+	$manifest = plugin_dir_path( __FILE__ ) . '/public/build/manifest.json';
 
-	if ( array_key_exists( $filename, $files_list ) ) {
+	if ( ! file_exists( $manifest ) ) {
+		return '';
+	}
+
+	$files_list = json_decode( file_get_contents( $manifest ), true ); // phpcs:ignore WordPressVIPMinimum.Performance.FetchingRemoteData.FileGetContentsUnknown -- Local manifest file.
+
+	if ( is_array( $files_list ) && isset( $files_list[ $filename ]['file'] ) ) {
 		return esc_url( plugin_dir_url( __FILE__ ) . '/public/build/' . $files_list[ $filename ]['file'] );
 	}
+
+	return '';
 }

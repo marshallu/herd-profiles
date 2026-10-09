@@ -25,12 +25,19 @@ function herd_profiles_employee( $atts ) {
 		$atts
 	);
 
+	$switched = false;
+
 	if ( $data['site'] ) {
-		switch_to_blog( get_id_from_blogname( $data['site'] ) );
+		$site_id = get_id_from_blogname( $data['site'] );
+
+		if ( $site_id ) {
+			$switched = switch_to_blog( $site_id );
+		}
 	}
 
 	$the_term     = false;
 	$dept_listing = false;
+	$sort_by_name = false;
 
 	if ( $data['ids'] ) {
 		$ids = trim( $data['ids'] );
@@ -46,35 +53,16 @@ function herd_profiles_employee( $atts ) {
 			),
 		);
 	} else {
-		if ( get_field( 'sort_by_last_name_first_name', 'option' ) ) {
-			$args = array(
-				'post_type'      => 'employee',
-				'posts_per_page' => -1,
-				'meta_query'     => array( // phpcs:ignore
-					'first_name' => array(
-						'key' => 'first_name',
-					),
-					'last_name'  => array(
-						'key' => 'last_name',
-					),
-				),
-				'orderby'        => array(
-					'menu_order' => 'ASC',
-					'last_name'  => 'ASC',
-					'first_name' => 'ASC',
-					'title'      => 'ASC',
-				),
-			);
-		} else {
-			$args = array(
-				'post_type'      => 'employee',
-				'posts_per_page' => -1,
-				'orderby'        => array(
-					'menu_order' => 'ASC',
-					'title'      => 'ASC',
-				),
-			);
-		}
+		$sort_by_name = (bool) get_field( 'sort_by_last_name_first_name', 'option' );
+
+		$args = array(
+			'post_type'      => 'employee',
+			'posts_per_page' => -1,
+			'orderby'        => array(
+				'menu_order' => 'ASC',
+				'title'      => 'ASC',
+			),
+		);
 
 		if ( $data['department'] ) {
 			$args['tax_query'] = array( // phpcs:ignore
@@ -91,6 +79,10 @@ function herd_profiles_employee( $atts ) {
 	}
 
 	$the_query = new WP_Query( $args );
+
+	if ( $sort_by_name ) {
+		$the_query->posts = herd_profiles_sort_by_name( $the_query->posts );
+	}
 
 	if ( $data['layout'] ) {
 		$display_style = $data['layout'];
@@ -243,7 +235,7 @@ function herd_profiles_employee( $atts ) {
 					$output .= esc_html( herd_profiles_format_phone( $phone ) );
 					$output .= '</div>';
 				}
-				if ( get_field( 'employee_email_address' ) && ( 'both' === get_field( 'profile_show_email_address', 'option' ) || 'profile' === get_field( 'profile_show_email_address', 'option' ) ) ) {
+				if ( get_field( 'employee_email_address' ) && ( 'both' === get_field( 'profile_show_email_address', 'option' ) || 'listing' === get_field( 'profile_show_email_address', 'option' ) ) ) {
 					$output     .= '<div class="flex items-center my-2">';
 					$output     .= '<svg class="text-gray-200 fill-current h-5 w-5 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"></path></svg>';
 						$output .= '<a href="mailto:' . esc_attr( $email ) . '">' . esc_html( $email ) . '</a>';
@@ -381,7 +373,9 @@ function herd_profiles_employee( $atts ) {
 				$output .= '<div class="w-full ' . esc_attr( $width ) . ' lg:px-6 mb-8">';
 				$output .= '<div class="flex flex-wrap flex-row lg:-mx-2">';
 				$output .= '<div class="w-full lg:w-1/4 lg:px-2">';
-				$output .= '<img class="object-cover rounded-lg" src="' . esc_url( $image['url'] ) . '"  srcset="' . esc_attr( wp_get_attachment_image_srcset( $image['ID'], 'large' ) ) . '" alt="' . esc_attr( $image['alt'] ) . '" />';
+				if ( $image ) {
+					$output .= '<img class="object-cover rounded-lg" src="' . esc_url( $image['url'] ) . '"  srcset="' . esc_attr( wp_get_attachment_image_srcset( $image['ID'], 'large' ) ) . '" alt="' . esc_attr( $image['alt'] ) . '" />';
+				}
 				$output .= '</div>';
 				$output .= '<div class="w-full lg:w-3/4 lg:px-2 mt-4 lg:mt-0">';
 				$output .= '<div class="text-lg font-semibold space-y-1">';
@@ -440,7 +434,7 @@ function herd_profiles_employee( $atts ) {
 					$output .= herd_profiles_format_phone( $phone );
 					$output .= '</div>';
 				}
-				if ( get_field( 'employee_email_address' ) && ( 'both' === get_field( 'profile_show_email_address', 'option' ) || 'profile' === get_field( 'profile_show_email_address', 'option' ) ) ) {
+				if ( get_field( 'employee_email_address' ) && ( 'both' === get_field( 'profile_show_email_address', 'option' ) || 'listing' === get_field( 'profile_show_email_address', 'option' ) ) ) {
 					$output .= '<div class="flex items-center my-2">';
 					$output .= '<svg class="text-gray-200 fill-current h-5 w-5 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"></path></svg>';
 					$output .= '<a href="mailto:' . esc_attr( $email ) . '">' . esc_html( $email ) . '</a>';
@@ -527,7 +521,7 @@ function herd_profiles_employee( $atts ) {
 					$output .= '<div>' . esc_html( herd_profiles_format_phone( $phone ) ) . '</div>';
 					$output .= '</div>';
 				}
-				if ( get_field( 'employee_email_address' ) && ( 'both' === get_field( 'profile_show_email_address', 'option' ) || 'profile' === get_field( 'profile_show_email_address', 'option' ) ) ) {
+				if ( get_field( 'employee_email_address' ) && ( 'both' === get_field( 'profile_show_email_address', 'option' ) || 'listing' === get_field( 'profile_show_email_address', 'option' ) ) ) {
 					$output .= '<div class="flex items-center my-2">';
 					$output .= '<svg class="text-green fill-current h-4 w-4 mr-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M502.3 190.8c3.9-3.1 9.7-.2 9.7 4.7V400c0 26.5-21.5 48-48 48H48c-26.5 0-48-21.5-48-48V195.6c0-5 5.7-7.8 9.7-4.7 22.4 17.4 52.1 39.5 154.1 113.6 21.1 15.4 56.7 47.8 92.2 47.6 35.7.3 72-32.8 92.3-47.6 102-74.1 131.6-96.3 154-113.7zM256 320c23.2.4 56.6-29.2 73.4-41.4 132.7-96.3 142.8-104.7 173.4-128.7 5.8-4.5 9.2-11.5 9.2-18.9v-19c0-26.5-21.5-48-48-48H48C21.5 64 0 85.5 0 112v19c0 7.4 3.4 14.3 9.2 18.9 30.6 23.9 40.7 32.4 173.4 128.7 16.8 12.2 50.2 41.8 73.4 41.4z"></path></svg>';
 					$output .= '<a href="mailto:' . esc_attr( $email ) . '">' . esc_html( $email ) . '</a>';
@@ -544,7 +538,7 @@ function herd_profiles_employee( $atts ) {
 			$output .= '<th>Title</th>';
 			$output .= '<th>Office</th>';
 			$output .= '<th>Phone</th>';
-			if ( 'both' === get_field( 'profile_show_email_address', 'option' ) || 'profile' === get_field( 'profile_show_email_address', 'option' ) ) {
+			if ( 'both' === get_field( 'profile_show_email_address', 'option' ) || 'listing' === get_field( 'profile_show_email_address', 'option' ) ) {
 				$output .= '<th>Email</th>';
 			}
 			$output .= '</tr>';
@@ -570,7 +564,7 @@ function herd_profiles_employee( $atts ) {
 				$output .= '<td class="">' . $position . '</td>';
 				$output .= '<td class="">' . $office . '</td>';
 				$output .= '<td class="whitespace-nowrap">' . esc_html( herd_profiles_format_phone( get_field( 'employee_phone_number', get_the_ID() ) ) ) . '</td>';
-				if ( 'both' === get_field( 'profile_show_email_address', 'option' ) || 'profile' === get_field( 'profile_show_email_address', get_the_ID(), 'option' ) ) {
+				if ( 'both' === get_field( 'profile_show_email_address', 'option' ) || 'listing' === get_field( 'profile_show_email_address', 'option' ) ) {
 					$output .= '<td class="whitespace-nowrap"><a href="mailto:' . esc_attr( get_field( 'employee_email_address', get_the_ID() ) ) . '" rel="noopener noreferrer">' . esc_html( get_field( 'employee_email_address', get_the_ID() ) ) . '</a></td>';
 				}
 
@@ -585,7 +579,7 @@ function herd_profiles_employee( $atts ) {
 		$output = 'No profiles found for this category.';
 	}
 
-	if ( $data['site'] ) {
+	if ( $switched ) {
 		restore_current_blog();
 	}
 	wp_reset_postdata();

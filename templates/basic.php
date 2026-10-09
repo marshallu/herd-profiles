@@ -24,7 +24,9 @@ if ( is_page_template( array( 'page-full-width.php', 'page-full-width-hero.php',
 			<div class="herd:w-full <?php echo esc_attr( $width ); ?> herd:lg:px-6 herd:mb-8">
 				<div class="herd:flex herd:flex-wrap herd:flex-row herd:lg:-mx-2">
 					<div class="herd:w-full herd:lg:w-1/4 herd:lg:px-2">
-						<img class="herd:object-cover herd:rounded-lg" src="<?php echo esc_url( $image['url'] ); ?>" alt="<?php echo esc_attr( $image['alt'] ); ?>" />
+						<?php if ( $image ) { ?>
+							<img class="herd:object-cover herd:rounded-lg" src="<?php echo esc_url( $image['url'] ); ?>" alt="<?php echo esc_attr( $image['alt'] ); ?>" />
+						<?php } ?>
 					</div>
 					<div class="herd:w-full herd:lg:w-3/4 herd:lg:px-2 herd:mt-4 herd:lg:mt-0">
 						<div class="herd:text-lg herd:font-semibold herd:space-y-1">

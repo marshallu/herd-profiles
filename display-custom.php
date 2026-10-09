@@ -19,35 +19,67 @@ function herd_profiles_order_department_archives( $query ) {
 	}
 
 	if ( is_tax( 'department' ) ) {
-		if ( get_field( 'sort_by_last_name_first_name', 'option' ) ) {
-			$query->set(
-				'meta_query',
-				array(
-					'last_name'  => array(
-						'key' => 'last_name',
-					),
-					'first_name' => array(
-						'key' => 'first_name',
-					),
-				)
-			);
-
-			$query->set(
-				'orderby',
-				array(
-					'menu_order' => 'ASC',
-					'last_name'  => 'ASC',
-					'first_name' => 'ASC',
-				)
-			);
-		} else {
-			$query->set( 'order', 'asc' );
-			$query->set( 'orderby', 'menu_order title' );
-		}
+		// Last name sorting is applied after the query by herd_profiles_sort_department_archives().
+		$query->set( 'order', 'asc' );
+		$query->set( 'orderby', 'menu_order title' );
 		$query->parse_query();
 		return;
 	}
 }
+
+/**
+ * Sort profiles by menu order, then last name, first name, and title.
+ *
+ * Done in PHP rather than with a meta_query so profiles missing a first or
+ * last name are still listed; those fall back to their title.
+ *
+ * @param WP_Post[] $posts The profiles to sort.
+ * @return WP_Post[]
+ */
+function herd_profiles_sort_by_name( $posts ) {
+	$keys = array();
+
+	foreach ( $posts as $the_post ) {
+		$last  = get_post_meta( $the_post->ID, 'last_name', true );
+		$first = get_post_meta( $the_post->ID, 'first_name', true );
+
+		$keys[ $the_post->ID ] = array(
+			(int) $the_post->menu_order,
+			strtolower( $last ? $last : $the_post->post_title ),
+			strtolower( (string) $first ),
+			strtolower( $the_post->post_title ),
+		);
+	}
+
+	usort(
+		$posts,
+		function ( $a, $b ) use ( $keys ) {
+			return $keys[ $a->ID ] <=> $keys[ $b->ID ];
+		}
+	);
+
+	return $posts;
+}
+
+/**
+ * Sort department archives by last name when the option is enabled.
+ *
+ * @param WP_Post[] $posts The queried posts.
+ * @param WP_Query  $query The query.
+ * @return WP_Post[]
+ */
+function herd_profiles_sort_department_archives( $posts, $query ) {
+	if ( is_admin() || ! $query->is_main_query() || ! $query->is_tax( 'department' ) ) {
+		return $posts;
+	}
+
+	if ( get_field( 'sort_by_last_name_first_name', 'option' ) ) {
+		$posts = herd_profiles_sort_by_name( $posts );
+	}
+
+	return $posts;
+}
+add_filter( 'the_posts', 'herd_profiles_sort_department_archives', 10, 2 );
 add_action( 'pre_get_posts', 'herd_profiles_order_department_archives', 1 );
 
 /**
