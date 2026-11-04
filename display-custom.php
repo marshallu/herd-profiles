@@ -110,7 +110,7 @@ add_action( 'pre_get_posts', 'herd_profiles_unlimited_profiles', 1 );
  */
 function herd_profiles_link_employee_names( $department = false ) {
 	if ( $department ) {
-		return (bool) get_field( 'department_display_link', $department );
+		return ! get_field( 'department_hide_link_to_profile', $department );
 	}
 
 	return (bool) get_field( 'profile_link_to_profile', 'option' );
