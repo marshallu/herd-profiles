@@ -12,7 +12,8 @@
 	},
 	"author": "Christopher McComas",
 	"devDependencies": {
+		"@tailwindcss/cli": "4.2.1",
 		"lefthook": "^1.7.16",
-		"tailwindcss": "^4.0.0"
+		"tailwindcss": "4.2.1"
 	}
 }
