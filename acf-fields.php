@@ -1423,11 +1423,11 @@ add_action( 'acf/include_fields', function() {
 		),
 		array(
 			'key' => 'field_5fff27c858618',
-			'label' => 'Display Link',
+			'label' => 'Link Employee Names to Profiles',
 			'name' => 'department_display_link',
 			'aria-label' => '',
 			'type' => 'true_false',
-			'instructions' => 'If turned off the department will not display on any of the listings or profile pages.',
+			'instructions' => 'When enabled, employee names on this department\'s listings link to their individual profiles. Turn this off to display employee names as plain text.',
 			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array(
@@ -1463,11 +1463,11 @@ add_action( 'acf/include_fields', function() {
 		),
 		array(
 			'key' => 'field_6022b5ff32ae1',
-			'label' => 'Hide Department',
+			'label' => 'Hide Department from Employee Profiles',
 			'name' => 'department_hide',
 			'aria-label' => '',
 			'type' => 'true_false',
-			'instructions' => 'This will hide the department from being listed on any page relating to a Profile.',
+			'instructions' => 'Hides this department name from employee listings and profile pages. This does not hide the department archive or any employees.',
 			'required' => 0,
 			'conditional_logic' => 0,
 			'wrapper' => array(

@@ -100,6 +100,23 @@ function herd_profiles_unlimited_profiles( $query ) {
 add_action( 'pre_get_posts', 'herd_profiles_unlimited_profiles', 1 );
 
 /**
+ * Determine whether employee names should link to their profiles in a listing.
+ *
+ * Department listings use their own setting. Other listings retain the global
+ * directory setting.
+ *
+ * @param WP_Term|false $department The department used for the listing.
+ * @return bool
+ */
+function herd_profiles_link_employee_names( $department = false ) {
+	if ( $department ) {
+		return (bool) get_field( 'department_display_link', $department );
+	}
+
+	return (bool) get_field( 'profile_link_to_profile', 'option' );
+}
+
+/**
  * Displays listings of Departments on Profile listings and Profiles
  *
  * @param integer $post The Post ID to get the terms for.

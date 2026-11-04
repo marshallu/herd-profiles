@@ -29,7 +29,7 @@ while ( have_posts() ) {
 			</div>
 			<div>
 				<?php
-				if ( get_field( 'profile_link_to_profile', 'option' ) ) {
+				if ( herd_profiles_link_employee_names( $the_term ) ) {
 					?>
 					<div class="herd:text-xl herd:font-semibold"><a href="<?php echo esc_url( get_post_permalink() ); ?>"><?php the_title(); ?></a></div>
 					<?php

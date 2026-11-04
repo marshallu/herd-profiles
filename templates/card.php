@@ -22,7 +22,7 @@ while ( have_posts() ) {
 	<div class="herd:w-full herd:lg:w-1/3 herd:px-0 herd:lg:px-4 herd:mb-4 herd:lg:mb-8 herd:flex herd:flex-row">
 		<div class="herd:w-full herd:bg-gray-100 herd:border herd:border-gray-200 herd:px-4 herd:py-4">
 			<?php
-			if ( get_field( 'profile_link_to_profile', 'option' ) ) {
+			if ( herd_profiles_link_employee_names( $the_term ) ) {
 				?>
 				<div class="herd:text-xl herd:font-semibold"><a href="<?php echo esc_url( get_post_permalink() ); ?>"><?php the_title(); ?></a></div>
 				<?php

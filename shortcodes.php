@@ -129,10 +129,10 @@ function herd_profiles_employee( $atts ) {
 
 				$output .= '<div class="columns w-full lg:w-5/12 lg:px-6 mt-6 lg:mt-0">';
 
-				if ( get_field( 'employee_more_info_link' ) ) {
-					$output .= '<strong><a href="' . esc_url( get_field( 'employee_more_info_link' ) ) . '" class="underline hover:no-underline">' . get_the_title() . '</a></strong><br>';
-				} elseif ( get_field( 'department_hide_link_to_profile', $the_term ) ) {
+				if ( ! herd_profiles_link_employee_names( $the_term ) ) {
 					$output .= '<strong>' . get_the_title() . '</strong><br>';
+				} elseif ( get_field( 'employee_more_info_link' ) ) {
+					$output .= '<strong><a href="' . esc_url( get_field( 'employee_more_info_link' ) ) . '" class="underline hover:no-underline">' . get_the_title() . '</a></strong><br>';
 				} else {
 					$output .= '<strong><a href="' . esc_url( get_post_permalink() ) . '" rel="noopener noreferrer" class="underline hover:no-underline">' . get_the_title() . '</a></strong><br>';
 				}
@@ -205,7 +205,7 @@ function herd_profiles_employee( $atts ) {
 				$output .= '</div>';
 				$output .= '<div class="columns w-full lg:w-3/4 lg:px-6 mt-6 lg:mt-0 entry-content">';
 
-				if ( get_field( 'department_hide_link_to_profile', $the_term ) ) {
+				if ( ! herd_profiles_link_employee_names( $the_term ) ) {
 					$output .= '<div class="text-xl font-semibold uppercase">' . get_the_title() . '</div>';
 				} else {
 					$output .= '<div class="text-xl font-semibold uppercase"><a href="' . esc_url( get_post_permalink() ) . '">' . get_the_title() . '</a></div>';
@@ -281,10 +281,10 @@ function herd_profiles_employee( $atts ) {
 					$output .= '</div>';
 
 					$output .= '<div class="columns w-full lg:w-2/3 lg:px-6 mt-6 lg:mt-0">';
-					if ( get_field( 'employee_more_info_link' ) ) {
+					if ( ! herd_profiles_link_employee_names( $the_term ) ) {
+						$output .= '<strong>' . get_the_title() . '</strong><br>';
+					} elseif ( get_field( 'employee_more_info_link' ) ) {
 						$output .= '<strong><a href="' . esc_url( get_field( 'employee_more_info_link' ) ) . '" class="underline hover:no-underline">' . get_the_title() . '</a></strong><br>';
-					} elseif ( get_field( 'department_hide_link_to_profile', $the_term ) ) {
-							$output .= '<strong>' . get_the_title() . '</strong><br>';
 					} else {
 						$output .= '<strong><a href="' . esc_url( get_post_permalink() ) . '" rel="noopener noreferrer" class="underline hover:no-underline">' . get_the_title() . '</a></strong><br>';
 					}
@@ -315,7 +315,7 @@ function herd_profiles_employee( $atts ) {
 					$output .= '<div class="w-full lg:w-1/3 px-0 lg:px-4 mb-4 lg:mb-8 flex flex-row">';
 					$output .= '<div class="w-full bg-gray-100 border border-gray-200 px-4 py-4">';
 
-					if ( get_field( 'profile_link_to_profile', 'option' ) ) {
+					if ( herd_profiles_link_employee_names( $the_term ) ) {
 						$output .= '<div class="text-xl font-semibold"><a href="' . esc_url( get_post_permalink() ) . '">' . get_the_title() . '</a></div>';
 					} else {
 						$output .= '<div class="text-xl font-semibold">' . get_the_title() . '</div>';
@@ -555,7 +555,7 @@ function herd_profiles_employee( $atts ) {
 
 				$output .= '<tr class="">';
 
-				if ( get_field( 'department_hide_link_to_profile', $the_term ) ) {
+				if ( ! herd_profiles_link_employee_names( $the_term ) ) {
 					$output .= '<td class="">' . esc_html( get_the_title() ) . '</td>';
 				} else {
 					$output .= '<td class=""><a href="' . esc_url( get_post_permalink() ) . '" rel="noopener noreferrer">' . esc_html( get_the_title() ) . '</a></td>';

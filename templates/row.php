@@ -25,22 +25,17 @@ while ( have_posts() ) {
 		</div>
 		<div class="columns herd:w-full herd:lg:w-5/12 herd:lg:px-6 herd:mt-6 herd:lg:mt-0">
 			<?php
-			if ( get_field( 'employee_more_info_link' ) ) {
+			if ( ! herd_profiles_link_employee_names( $the_term ) ) {
+				?>
+					<span class="herd:text-lg herd:font-bold"><?php the_title(); ?></span><br>
+				<?php
+			} elseif ( get_field( 'employee_more_info_link' ) ) {
 				?>
 					<span class="herd:text-lg herd:font-bold"><a href="<?php echo esc_url( get_field( 'employee_more_info_link' ) ); ?>" class="herd:underline herd:hover:no-underline"><?php the_title(); ?></a></span><br>
 				<?php
 			} else {
-				if ( get_field( 'department_hide_link_to_profile', $the_term ) ) {
-					?>
-						<span class="herd:text-lg herd:font-bold"><?php the_title(); ?></span><br>
-					<?php
-				} else {
-					?>
-					<span class="herd:text-lg herd:font-bold"><a href="<?php echo esc_url( get_post_permalink() ); ?>" rel="noopener noreferrer" class="herd:underline herd:hover:no-underline"><?php the_title(); ?></a></span><br>
-					<?php
-				}
 				?>
-
+				<span class="herd:text-lg herd:font-bold"><a href="<?php echo esc_url( get_post_permalink() ); ?>" rel="noopener noreferrer" class="herd:underline herd:hover:no-underline"><?php the_title(); ?></a></span><br>
 				<?php
 			}
 

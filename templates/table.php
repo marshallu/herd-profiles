@@ -31,7 +31,7 @@
 				<tr class="">
 					<td class="herd:text-gray-900">
 						<?php
-						if ( get_field( 'department_hide_link_to_profile', $the_term ) ) {
+						if ( ! herd_profiles_link_employee_names( $the_term ) ) {
 							?>
 								<?php echo esc_html( get_the_title() ); ?>
 							<?php

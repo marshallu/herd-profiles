@@ -25,7 +25,7 @@ while ( have_posts() ) {
 		</div>
 		<div class="columns herd:w-full herd:lg:w-3/4 herd:lg:px-6 herd:mt-6 herd:lg:mt-0 entry-content">
 		<?php
-		if ( get_field( 'department_hide_link_to_profile', $the_term ) ) {
+		if ( ! herd_profiles_link_employee_names( $the_term ) ) {
 			?>
 			<div class="herd:text-xl herd:font-semibold herd:uppercase"><?php the_title(); ?></div>
 			<?php
