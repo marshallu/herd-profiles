@@ -117,6 +117,21 @@ function herd_profiles_link_employee_names( $department = false ) {
 }
 
 /**
+ * Whether employee email addresses should display in the given context.
+ *
+ * The setting is read by field key: on sites where Display Settings has never
+ * been saved, ACF cannot resolve the field by name and returns null, while the
+ * key lets ACF fall back to the field's default of "both".
+ *
+ * @param string $context Either 'listing' or 'profile'.
+ * @return bool
+ */
+function herd_profiles_show_email( $context ) {
+	$setting = get_field( 'field_5f5a67199170c', 'option' );
+	return 'both' === $setting || $context === $setting;
+}
+
+/**
  * Displays listings of Departments on Profile listings and Profiles
  *
  * @param integer $post The Post ID to get the terms for.

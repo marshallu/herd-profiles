@@ -9,7 +9,7 @@
  * Plugin Name: Herd Profiles
  * Plugin URI: https://www.marshall.edu
  * Description: A facutly, staff, employee management plugin for Marshall University
- * Version: 1.7.6
+ * Version: 1.7.7
  * Author: Christopher McComas
  */
 

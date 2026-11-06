@@ -39,8 +39,7 @@ $context['twitter']         = get_field( 'employee_twitter' );
 $context['linkedin']        = get_field( 'employee_linkedin' );
 
 // --- Email (visibility controlled by option/profile field) ---
-$show_email_option = get_field( 'profile_show_email_address', 'option' );
-if ( get_field( 'employee_email_address' ) && ( 'both' === $show_email_option || 'profile' === $show_email_option ) ) {
+if ( get_field( 'employee_email_address' ) && herd_profiles_show_email( 'profile' ) ) {
 	$context['email'] = get_field( 'employee_email_address' );
 }
 

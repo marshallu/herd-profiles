@@ -17,7 +17,7 @@
 				<th>Office</th>
 				<th>Phone</th>
 				<?php
-				if ( 'both' === get_field( 'profile_show_email_address', 'option' ) || 'listing' === get_field( 'profile_show_email_address', 'option' ) ) {
+				if ( herd_profiles_show_email( 'listing' ) ) {
 					?>
 					<th>Email</th>
 				<?php } ?>
@@ -44,7 +44,7 @@
 					<td class="herd:text-gray-900"><?php echo esc_html( get_field( 'employee_office_location' ) ); ?></td>
 					<td class="herd:text-gray-900"><?php echo esc_html( herd_profiles_format_phone( get_field( 'employee_phone_number' ) ) ); ?></td>
 					<?php
-					if ( 'both' === get_field( 'profile_show_email_address', 'option' ) || 'listing' === get_field( 'profile_show_email_address', 'option' ) ) {
+					if ( herd_profiles_show_email( 'listing' ) ) {
 						?>
 						<td class=""><a href="mailto:<?php echo esc_attr( get_field( 'employee_email_address' ) ); ?>" rel="noopener noreferrer"><?php echo esc_html( get_field( 'employee_email_address' ) ); ?></a></td>
 					<?php } ?>

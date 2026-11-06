@@ -57,7 +57,7 @@ while ( have_posts() ) {
 				Telephone: <a href="tel:+1-<?php echo esc_attr( herd_profiles_format_phone( $phone ) ); ?>"><?php echo esc_html( herd_profiles_format_phone( $phone ) ); ?></a><br>
 			<?php } ?>
 
-			<?php if ( get_field( 'employee_email_address' ) && ( 'both' === get_field( 'profile_show_email_address', 'option' ) || 'listing' === get_field( 'profile_show_email_address', 'option' ) ) ) { ?>
+			<?php if ( get_field( 'employee_email_address' ) && herd_profiles_show_email( 'listing' ) ) { ?>
 			E-mail: <a href="mailto:<?php echo esc_attr( $email ); ?>"><?php echo esc_html( $email ); ?></a>
 			<?php } ?>
 

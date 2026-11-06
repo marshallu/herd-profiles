@@ -49,7 +49,7 @@ while ( have_posts() ) {
 					<div class="herd:mt-1">Phone: <?php echo esc_attr( herd_profiles_format_phone( get_field( 'employee_phone_number' ) ) ); ?></div>
 				<?php } ?>
 
-				<?php if ( get_field( 'employee_email_address' ) && ( 'both' === get_field( 'profile_show_email_address', 'option' ) || 'listing' === get_field( 'profile_show_email_address', 'option' ) ) ) { ?>
+				<?php if ( get_field( 'employee_email_address' ) && herd_profiles_show_email( 'listing' ) ) { ?>
 					<div class="herd:flex herd:items-center herd:my-2"><a href="mailto:<?php echo esc_attr( get_field( 'employee_email_address' ) ); ?>"><?php echo esc_html( get_field( 'employee_email_address' ) ); ?></a></div>
 				<?php } ?>
 
