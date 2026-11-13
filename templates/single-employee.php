@@ -84,16 +84,15 @@ if ( $has_content_fields ) {
 	$toggles = '[mu_toggles]';
 
 	// Helper to build a list of items inside a toggle.
-	$list_svg = '<svg class="herd:mr-4 herd:h-6 herd:w-6 herd:fill-green herd:mt-1 herd:lg:mt-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M20 10a10 10 0 1 1-20 0 10 10 0 0 1 20 0zm-2 0a8 8 0 1 0-16 0 8 8 0 0 0 16 0zm-8 2H5V8h5V5l5 5-5 5v-3z"/></svg>';
+	$list_svg = '<svg class="herd-profiles-profile__list-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M20 10a10 10 0 1 1-20 0 10 10 0 0 1 20 0zm-2 0a8 8 0 1 0-16 0 8 8 0 0 0 16 0zm-8 2H5V8h5V5l5 5-5 5v-3z"/></svg>';
 
 	$build_list = function ( array $rows, string $field_key ) use ( $list_svg ) {
-		$out = '<div role="list" class="herd:flex herd:flex-wrap herd:mx-0 herd:lg:-mx-4 herd:justify-center">';
+		$out = '<div role="list" class="herd-profiles-profile__list">';
 		foreach ( $rows as $row ) {
-			$out .= '<div role="listitem" class="herd:px-0 herd:lg:px-4 herd:w-full herd:lg:w-full herd:flex">';
-			$out .= '<div class="herd:w-full herd:flex herd:items-start herd:px-3 herd:my-2">';
+			$out .= '<div role="listitem" class="herd-profiles-profile__list-item">';
 			$out .= $list_svg;
-			$out .= '<span class="herd:flex-1">' . wp_kses_post( $row[ $field_key ] ?? '' ) . '</span>';
-			$out .= '</div></div>';
+			$out .= '<span class="herd-profiles-profile__list-text">' . wp_kses_post( $row[ $field_key ] ?? '' ) . '</span>';
+			$out .= '</div>';
 		}
 		$out .= '</div>';
 		return $out;
@@ -101,43 +100,43 @@ if ( $has_content_fields ) {
 
 	if ( get_field( 'employee_contact_for' ) ) {
 		$list_title = ! empty( get_field( 'profile_row_title', 'option' ) ) ? get_field( 'profile_row_title', 'option' ) : 'Contact For';
-		$toggles   .= '[mu_toggle open=true content_class="overflow-x-auto" id="contactfor" title="' . esc_attr( $list_title ) . '"]';
+		$toggles   .= '[mu_toggle open=true content_class="herd-profiles-profile__toggle-content" id="contactfor" title="' . esc_attr( $list_title ) . '"]';
 		$toggles   .= $build_list( get_field( 'employee_contact_for' ), 'contact_text' );
 		$toggles   .= '[/mu_toggle]';
 	}
 
 	if ( get_field( 'employee_education' ) ) {
-		$toggles .= '[mu_toggle content_class="overflow-x-auto" id="education" title="Education Information"]';
+		$toggles .= '[mu_toggle content_class="herd-profiles-profile__toggle-content" id="education" title="Education Information"]';
 		$toggles .= $build_list( get_field( 'employee_education' ), 'education_information' );
 		$toggles .= '[/mu_toggle]';
 	}
 
 	if ( get_field( 'employee_teaching_philosophy' ) ) {
-		$toggles .= '[mu_toggle content_class="overflow-x-auto" title="Teaching Philosophy"]';
+		$toggles .= '[mu_toggle content_class="herd-profiles-profile__toggle-content" title="Teaching Philosophy"]';
 		$toggles .= wp_kses_post( get_field( 'employee_teaching_philosophy' ) );
 		$toggles .= '[/mu_toggle]';
 	}
 
 	if ( get_field( 'employee_awards' ) ) {
-		$toggles .= '[mu_toggle content_class="overflow-x-auto" title="Employee Awards and Honors"]';
+		$toggles .= '[mu_toggle content_class="herd-profiles-profile__toggle-content" title="Employee Awards and Honors"]';
 		$toggles .= $build_list( get_field( 'employee_awards' ), 'award_information' );
 		$toggles .= '[/mu_toggle]';
 	}
 
 	if ( get_field( 'employee_scholarship' ) ) {
-		$toggles .= '[mu_toggle content_class="overflow-x-auto" title="Scholarship"]';
+		$toggles .= '[mu_toggle content_class="herd-profiles-profile__toggle-content" title="Scholarship"]';
 		$toggles .= $build_list( get_field( 'employee_scholarship' ), 'scholarship_information' );
 		$toggles .= '[/mu_toggle]';
 	}
 
 	if ( get_field( 'employee_research' ) ) {
-		$toggles .= '[mu_toggle content_class="overflow-x-auto" title="Contracts, Grants, and Sponsored Research"]';
+		$toggles .= '[mu_toggle content_class="herd-profiles-profile__toggle-content" title="Contracts, Grants, and Sponsored Research"]';
 		$toggles .= $build_list( get_field( 'employee_research' ), 'contracts_grants_and_sponsored_research_item' );
 		$toggles .= '[/mu_toggle]';
 	}
 
 	if ( get_field( 'employee_conferences' ) ) {
-		$toggles .= '[mu_toggle content_class="overflow-x-auto" title="Conference Presentations"]';
+		$toggles .= '[mu_toggle content_class="herd-profiles-profile__toggle-content" title="Conference Presentations"]';
 		$toggles .= $build_list( get_field( 'employee_conferences' ), 'conference_information' );
 		$toggles .= '[/mu_toggle]';
 	}
@@ -147,48 +146,46 @@ if ( $has_content_fields ) {
 			if ( empty( $list['employee_list_item'] ) ) {
 				continue;
 			}
-			$toggles .= '[mu_toggle content_class="overflow-x-auto" title="' . esc_attr( $list['list_title'] ) . '"]';
+			$toggles .= '[mu_toggle content_class="herd-profiles-profile__toggle-content" title="' . esc_attr( $list['list_title'] ) . '"]';
 			$toggles .= $build_list( $list['employee_list_item'], 'list_item_detail' );
 			$toggles .= '[/mu_toggle]';
 		}
 	}
 
 	if ( get_field( 'employee_department_service' ) ) {
-		$toggles .= '[mu_toggle content_class="overflow-x-auto" title="Service to the Department"]';
+		$toggles .= '[mu_toggle content_class="herd-profiles-profile__toggle-content" title="Service to the Department"]';
 		$toggles .= $build_list( get_field( 'employee_department_service' ), 'service_information' );
 		$toggles .= '[/mu_toggle]';
 	}
 
 	if ( get_field( 'employee_college_service' ) ) {
-		$out = '<div role="list" class="herd:flex herd:flex-wrap herd:mx-0 herd:lg:-mx-4 herd:justify-center">';
-		$svg = '<svg class="herd:mr-4 herd:h-6 herd:w-6 herd:fill-green herd:mt-1 herd:lg:mt-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M20 10a10 10 0 1 1-20 0 10 10 0 0 1 20 0zm-2 0a8 8 0 1 0-16 0 8 8 0 0 0 16 0zm-8 2H5V8h5V5l5 5-5 5v-3z"/></svg>';
+		$out = '<div role="list" class="herd-profiles-profile__list">';
 		foreach ( get_field( 'employee_college_service' ) as $row ) {
 			$text = ! empty( $row['service_information'] ) ? $row['service_information'] : ( $row['service_to_the_college'] ?? '' );
-			$out .= '<div role="listitem" class="herd:px-0 herd:lg:px-4 herd:w-full herd:lg:w-full herd:flex"><div class="herd:w-full herd:flex herd:items-start herd:px-3 herd:my-2">' . $svg . '<span class="herd:flex-1">' . wp_kses_post( $text ) . '</span></div></div>';
+			$out .= '<div role="listitem" class="herd-profiles-profile__list-item">' . $list_svg . '<span class="herd-profiles-profile__list-text">' . wp_kses_post( $text ) . '</span></div>';
 		}
 		$out     .= '</div>';
-		$toggles .= '[mu_toggle content_class="overflow-x-auto" title="Service to the College"]' . $out . '[/mu_toggle]';
+		$toggles .= '[mu_toggle content_class="herd-profiles-profile__toggle-content" title="Service to the College"]' . $out . '[/mu_toggle]';
 	}
 
 	if ( get_field( 'employee_university_service' ) ) {
-		$out = '<div role="list" class="herd:flex herd:flex-wrap herd:mx-0 herd:lg:-mx-4 herd:justify-center">';
-		$svg = '<svg class="herd:mr-4 herd:h-6 herd:w-6 herd:fill-green herd:mt-1 herd:lg:mt-0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M20 10a10 10 0 1 1-20 0 10 10 0 0 1 20 0zm-2 0a8 8 0 1 0-16 0 8 8 0 0 0 16 0zm-8 2H5V8h5V5l5 5-5 5v-3z"/></svg>';
+		$out = '<div role="list" class="herd-profiles-profile__list">';
 		foreach ( get_field( 'employee_university_service' ) as $row ) {
 			$text = ! empty( $row['service_information'] ) ? $row['service_information'] : ( $row['service_to_the_university'] ?? '' );
-			$out .= '<div role="listitem" class="herd:px-0 herd:lg:px-4 herd:w-full herd:lg:w-full herd:flex"><div class="herd:w-full herd:flex herd:items-start herd:px-3 herd:my-2">' . $svg . '<span class="herd:flex-1">' . wp_kses_post( $text ) . '</span></div></div>';
+			$out .= '<div role="listitem" class="herd-profiles-profile__list-item">' . $list_svg . '<span class="herd-profiles-profile__list-text">' . wp_kses_post( $text ) . '</span></div>';
 		}
 		$out     .= '</div>';
-		$toggles .= '[mu_toggle content_class="overflow-x-auto" title="Service to the University"]' . $out . '[/mu_toggle]';
+		$toggles .= '[mu_toggle content_class="herd-profiles-profile__toggle-content" title="Service to the University"]' . $out . '[/mu_toggle]';
 	}
 
 	if ( get_field( 'employee_service_profession' ) ) {
-		$toggles .= '[mu_toggle content_class="overflow-x-auto" title="Service to the Profession"]';
+		$toggles .= '[mu_toggle content_class="herd-profiles-profile__toggle-content" title="Service to the Profession"]';
 		$toggles .= $build_list( get_field( 'employee_service_profession' ), 'service_to_the_profession' );
 		$toggles .= '[/mu_toggle]';
 	}
 
 	if ( get_field( 'employee_service_community' ) ) {
-		$toggles .= '[mu_toggle content_class="overflow-x-auto" title="Service to the Community"]';
+		$toggles .= '[mu_toggle content_class="herd-profiles-profile__toggle-content" title="Service to the Community"]';
 		$toggles .= $build_list( get_field( 'employee_service_community' ), 'service_information' );
 		$toggles .= '[/mu_toggle]';
 	}

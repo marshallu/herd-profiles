@@ -17,25 +17,25 @@ while ( have_posts() ) {
 	$email       = get_field( 'employee_email_address' );
 	$contact_for = get_field( 'employee_contact_for' );
 	?>
-	<div class="marsha-row herd:flex herd:flex-wrap herd:-mx-2 herd:lg:-mx-6 herd:py-6 herd:border-b herd:border-gray-100">
-		<div class="columns herd:w-full herd:lg:w-1/6 herd:lg:px-6 herd:mt-6 herd:lg:mt-0">
+	<div class="marsha-row herd-profiles-row">
+		<div class="columns herd-profiles-row__photo">
 			<?php if ( get_field( 'employee_headshot' ) ) { ?>
-				<img src="<?php echo esc_url( $image['sizes']['medium'] ?? $image['url'] ); ?>" alt="<?php echo esc_attr( $image['alt'] ); ?>" class="herd:mx-auto herd:rounded-lg" />
+				<img src="<?php echo esc_url( $image['sizes']['medium'] ?? $image['url'] ); ?>" alt="<?php echo esc_attr( $image['alt'] ); ?>" class="herd-profiles-row__image herd-profiles-row__image--centered" />
 			<?php } ?>
 		</div>
-		<div class="columns herd:w-full herd:lg:w-5/12 herd:lg:px-6 herd:mt-6 herd:lg:mt-0">
+		<div class="columns herd-profiles-row__main">
 			<?php
 			if ( ! herd_profiles_link_employee_names( $the_term ) ) {
 				?>
-					<span class="herd:text-lg herd:font-bold"><?php the_title(); ?></span><br>
+					<span class="herd-profiles-row__name"><?php the_title(); ?></span><br>
 				<?php
 			} elseif ( get_field( 'employee_more_info_link' ) ) {
 				?>
-					<span class="herd:text-lg herd:font-bold"><a href="<?php echo esc_url( get_field( 'employee_more_info_link' ) ); ?>" class="herd:underline herd:hover:no-underline"><?php the_title(); ?></a></span><br>
+					<span class="herd-profiles-row__name"><a href="<?php echo esc_url( get_field( 'employee_more_info_link' ) ); ?>" class="herd-profiles-row__name-link"><?php the_title(); ?></a></span><br>
 				<?php
 			} else {
 				?>
-				<span class="herd:text-lg herd:font-bold"><a href="<?php echo esc_url( get_post_permalink() ); ?>" rel="noopener noreferrer" class="herd:underline herd:hover:no-underline"><?php the_title(); ?></a></span><br>
+				<span class="herd-profiles-row__name"><a href="<?php echo esc_url( get_post_permalink() ); ?>" rel="noopener noreferrer" class="herd-profiles-row__name-link"><?php the_title(); ?></a></span><br>
 				<?php
 			}
 
@@ -66,7 +66,7 @@ while ( have_posts() ) {
 			<?php } ?>
 		</div>
 
-		<div class="columns herd:w-full herd:lg:w-5/12 herd:lg:px-6  herd:mt-6 herd:lg:mt-0">
+		<div class="columns herd-profiles-row__aside">
 		<?php
 		if ( $contact_for ) {
 			if ( ! empty( get_field( 'profile_row_title', 'option' ) ) ) {

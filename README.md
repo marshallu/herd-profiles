@@ -7,10 +7,10 @@ Please review the documentation at https://www.marshall.edu/marsha/herd-profiles
 
 ## Developer Notes
 1. Clone the repo
-2. Run `npm install` to install the required npm dependencies
+2. Run `npm install` to install the Git hooks
 3. Run `composer install` to install the required composer dependencies
-4. While developing local run `npm run dev` to start the Tailwind CSS watcher.
-5. When ready to push to production run `npm run build`
+
+Styles live in `css/herd-profiles.css`, which WordPress loads as is, so there is no build step. Class names follow [BEM](https://getbem.com/naming/) (`block__element--modifier`), and every block starts with `herd-profiles-` so it cannot clash with a theme or another plugin, for example `herd-profiles-card__name` or `herd-profiles-row--profile`.
 
 PHP files are checked with WordPress VIP Coding Standards through `composer lint`. Run `composer format` to apply safe automatic fixes before committing. The project-local VIP standards are installed by `composer install`.
 

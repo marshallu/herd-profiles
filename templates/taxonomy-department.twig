@@ -3,20 +3,16 @@
 {% block content %}
 {% include 'partials/no-hero.twig' %}
 
-<div class="w-full xl:container mx-auto px-6 pt-4 lg:pt-12 pb-16" id="content" tabindex="-1">
-	<div class="flex flex-wrap mx-0 lg:-mx-6 px-0">
-		<div class="w-full lg:px-6">
-			{% if listing_html %}
-				<header class="page-header">
-					<h1 class="entry-title font-sans uppercase font-semibold text-gray-700 mb-4 text-3xl lg:text-4xl">{{ page_title }}</h1>
-					{% if archive_description %}
-						<div class="archive-description">{{ archive_description|raw }}</div>
-					{% endif %}
-				</header>
-
-				{{ listing_html|raw }}
+<div class="herd-profiles-page" id="content" tabindex="-1">
+	{% if listing_html %}
+		<header class="page-header">
+			<h1 class="entry-title herd-profiles-page__title">{{ page_title }}</h1>
+			{% if archive_description %}
+				<div class="archive-description">{{ archive_description|raw }}</div>
 			{% endif %}
-		</div>
-	</div>
+		</header>
+
+		{{ listing_html|raw }}
+	{% endif %}
 </div>
 {% endblock %}

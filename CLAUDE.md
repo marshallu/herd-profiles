@@ -13,12 +13,6 @@ Herd Profiles is a WordPress plugin for managing employee/faculty profiles at Ma
 npm install
 composer install
 
-# CSS development (Tailwind watcher)
-npm run dev
-
-# CSS production build (minified)
-npm run build
-
 # PHP linting (WordPress VIP Coding Standards)
 composer lint
 
@@ -57,7 +51,9 @@ Each template is a standalone PHP file loaded by the shortcode based on the `lay
 
 ### CSS
 
-Tailwind CSS v4 source is at `source/css/herd-profiles.css`; compiled output goes to `css/herd-profiles.css`. The `source/` and `css/` directories are excluded from PHP linting.
+`css/herd-profiles.css` is hand-written and enqueued as is; there is no CSS build step. The `css/` directory is excluded from PHP linting.
+
+Class names follow BEM (`block__element--modifier`) and every block is prefixed `herd-profiles-` (for example `herd-profiles-icon-card__name`, `herd-profiles-row--profile`) so they cannot clash with themes or other plugins. Each listing layout is its own block; `herd-profiles-row` is shared by the row, enhanced, and full profile layouts, and `herd-profiles-contact-item` by any icon-plus-detail line. Do not add utility classes. Unprefixed theme hooks such as `entry-title`, `entry-content`, `marsha-row`, `columns`, and the `table` classes stay in the markup for themes that style them.
 
 ### Multi-site Support
 

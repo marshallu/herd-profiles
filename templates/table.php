@@ -9,7 +9,7 @@
 
 ?>
 <div class="large-table">
-	<table class="table table-striped table-bordered herd:w-full">
+	<table class="table table-striped table-bordered herd-profiles-table">
 		<thead>
 			<tr class="">
 				<th>Name</th>
@@ -29,7 +29,7 @@
 				the_post();
 				?>
 				<tr class="">
-					<td class="herd:text-gray-900">
+					<td class="herd-profiles-table__cell">
 						<?php
 						if ( ! herd_profiles_link_employee_names( $the_term ) ) {
 							?>
@@ -40,9 +40,9 @@
 								<a href="<?php echo esc_url( get_post_permalink() ); ?>" rel="noopener noreferrer"><?php echo esc_html( get_the_title() ); ?></a>
 						<?php } ?>
 					</td>
-					<td class="herd:text-gray-900"><?php echo esc_html( get_field( 'employee_position' ) ); ?></td>
-					<td class="herd:text-gray-900"><?php echo esc_html( get_field( 'employee_office_location' ) ); ?></td>
-					<td class="herd:text-gray-900"><?php echo esc_html( herd_profiles_format_phone( get_field( 'employee_phone_number' ) ) ); ?></td>
+					<td class="herd-profiles-table__cell"><?php echo esc_html( get_field( 'employee_position' ) ); ?></td>
+					<td class="herd-profiles-table__cell"><?php echo esc_html( get_field( 'employee_office_location' ) ); ?></td>
+					<td class="herd-profiles-table__cell"><?php echo esc_html( herd_profiles_format_phone( get_field( 'employee_phone_number' ) ) ); ?></td>
 					<?php
 					if ( herd_profiles_show_email( 'listing' ) ) {
 						?>
