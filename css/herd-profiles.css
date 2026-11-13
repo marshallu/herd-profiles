@@ -72,6 +72,10 @@
 	gap: 2rem;
 }
 
+.herd-profiles-profile__sidebar {
+	overflow-wrap: anywhere;
+}
+
 .herd-profiles-profile__headshot {
 	display: block;
 	max-width: 100%;
@@ -106,6 +110,7 @@
 }
 
 .herd-profiles-profile__contact-icon {
+	flex-shrink: 0;
 	width: 1.25rem;
 	height: 1.25rem;
 	margin-right: 1rem;
@@ -176,6 +181,7 @@
 }
 
 .herd-profiles-profile__list-icon {
+	flex-shrink: 0;
 	width: 1.5rem;
 	height: 1.5rem;
 	margin-top: 0.25rem;
@@ -221,6 +227,7 @@
 }
 
 .herd-profiles-contact-item__icon {
+	flex-shrink: 0;
 	width: 1.25rem;
 	height: 1.25rem;
 	margin-right: 1rem;
@@ -265,6 +272,10 @@
 	box-sizing: border-box;
 	width: 100%;
 	margin-top: 1.5rem;
+}
+
+.herd-profiles-row__main {
+	overflow-wrap: anywhere;
 }
 
 .herd-profiles-row__image {
@@ -400,6 +411,7 @@
 }
 
 .herd-profiles-card__box {
+	overflow-wrap: anywhere;
 	box-sizing: border-box;
 	width: 100%;
 	padding: 1rem;
@@ -588,6 +600,7 @@
 }
 
 .herd-profiles-grid__inner {
+	overflow-wrap: anywhere;
 	box-sizing: border-box;
 	width: 100%;
 	padding: 1rem;
@@ -679,6 +692,7 @@
 }
 
 .herd-profiles-icon-card__icon {
+	flex-shrink: 0;
 	width: 1.5rem;
 	height: 1.5rem;
 	margin-top: 0.5rem;
@@ -699,6 +713,7 @@
 }
 
 .herd-profiles-icon-card__details {
+	overflow-wrap: anywhere;
 	flex: 1;
 	margin-top: 1.5rem;
 	margin-bottom: 0.5rem;
@@ -739,6 +754,7 @@
 /* Sidebar: compact name, position, phone, and email for narrow columns. */
 
 .herd-profiles-sidebar {
+	overflow-wrap: anywhere;
 	margin-bottom: 2rem;
 }
 
